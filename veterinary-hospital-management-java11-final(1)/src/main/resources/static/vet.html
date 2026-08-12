@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Veterinarian Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h2>Veterinarian Dashboard</h2>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main>
+
+    <div class="grid">
+
+
+        <!-- APPOINTMENTS -->
+
+        <section class="card wide">
+
+            <h3>Priority Appointments</h3>
+
+            <div id="appointments">
+                Loading appointments...
+            </div>
+
+        </section>
+
+
+        <!-- MEDICAL REPORT -->
+
+        <section class="card">
+
+            <h3>Create Medical Report</h3>
+
+            <input
+                id="petId"
+                placeholder="Pet ID"
+            >
+
+            <textarea
+                id="symptoms"
+                placeholder="Symptoms"
+            ></textarea>
+
+            <textarea
+                id="observations"
+                placeholder="Clinical observations"
+            ></textarea>
+
+            <textarea
+                id="diagnosis"
+                placeholder="Diagnosis"
+            ></textarea>
+
+            <textarea
+                id="treatment"
+                placeholder="Treatment"
+            ></textarea>
+
+            <input
+                id="followUpDate"
+                placeholder="Follow-up date"
+            >
+
+            <label>
+
+                <input
+                    id="surgery"
+                    type="checkbox"
+                    style="width:auto"
+                >
+
+                Surgery required
+
+            </label>
+
+            <textarea
+                id="surgeryDetails"
+                placeholder="Surgery details"
+            ></textarea>
+
+            <textarea
+                id="notes"
+                placeholder="Notes"
+            ></textarea>
+
+            <button onclick="createReport()">
+                🩺 Save Medical Report
+            </button>
+
+        </section>
+
+
+        <!-- PRESCRIPTION -->
+
+        <section class="card">
+
+            <h3>Prescription</h3>
+
+            <input
+                id="ppId"
+                placeholder="Pet ID"
+            >
+
+            <input
+                id="medicine"
+                placeholder="Medicine name"
+            >
+
+            <input
+                id="dosage"
+                placeholder="Dosage"
+            >
+
+            <input
+                id="frequency"
+                placeholder="Frequency"
+            >
+
+            <input
+                id="duration"
+                placeholder="Duration"
+            >
+
+            <textarea
+                id="instructions"
+                placeholder="Instructions"
+            ></textarea>
+
+            <button onclick="prescribe()">
+                💊 Save Prescription
+            </button>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<script src="/js/vet.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pet Owner Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h2>Pet Owner Dashboard</h2>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main>
+
+    <div class="grid">
+
+
+        <!-- MY PETS -->
+
+        <section class="card">
+
+            <h3>My Pets</h3>
+
+            <div id="pets">
+                Loading pets...
+            </div>
+
+            <button onclick="addPet()">
+                + Add Pet
+            </button>
+
+        </section>
+
+
+        <!-- APPOINTMENT -->
+
+        <section class="card">
+
+            <h3>Book Appointment</h3>
+
+            <select id="pet">
+            </select>
+
+            <select id="vet">
+            </select>
+
+            <input
+                id="date"
+                type="date"
+            >
+
+            <input
+                id="time"
+                type="time"
+            >
+
+            <textarea
+                id="reason"
+                placeholder="Reason for appointment"
+            ></textarea>
+
+            <button onclick="bookAppointment()">
+                📅 Book Appointment
+            </button>
+
+        </section>
+
+
+        <!-- APPOINTMENTS -->
+
+        <section class="card">
+
+            <h3>My Appointments</h3>
+
+            <div id="appointments">
+                Loading appointments...
+            </div>
+
+        </section>
+
+
+        <!-- GROOMING -->
+
+        <section class="card">
+
+            <h3>Grooming & Spa</h3>
+
+            <select id="gpet">
+            </select>
+
+            <select id="service">
+
+                <option>Bath</option>
+
+                <option>Hair Grooming</option>
+
+                <option>Nail Trimming</option>
+
+                <option>Ear Cleaning</option>
+
+                <option>Full Grooming</option>
+
+            </select>
+
+            <input
+                id="gdate"
+                type="date"
+            >
+
+            <input
+                id="gtime"
+                type="time"
+            >
+
+            <input
+                id="req"
+                placeholder="Additional requirements"
+            >
+
+            <button onclick="bookGrooming()">
+                ✨ Book Grooming
+            </button>
+
+            <div id="grooming"></div>
+
+        </section>
+
+
+        <!-- VACCINATION -->
+
+        <section class="card">
+
+            <h3>Vaccination Reminders</h3>
+
+            <div id="vaccines">
+                Select a pet to load vaccination records.
+            </div>
+
+        </section>
+
+
+        <!-- REPORTS -->
+
+        <section class="card">
+
+            <h3>Medical Reports</h3>
+
+            <div id="reports">
+                Select a pet to load medical reports.
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<script src="/js/owner.js"></script>
+
+</body>
+
+</html>
