@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Owner Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <h2>Pet Owner Dashboard</h2>
+    <button onclick="logout()">Logout</button>
+</header>
+
+<main>
+    <div class="grid">
+
+        <section class="card">
+            <h3>My Pets</h3>
+            <div id="pets">Loading pets...</div>
+        </section>
+
+        <section class="card">
+            <h3>Available Veterinarians</h3>
+            <div id="doctors">Loading veterinarians...</div>
+        </section>
+
+        <section class="card">
+            <h3>Book Veterinarian Appointment</h3>
+
+            <label>Pet</label>
+            <select id="pet"></select>
+
+            <label>Veterinarian</label>
+            <select id="vet"></select>
+
+            <label>Date</label>
+            <input id="date" type="date">
+
+            <label>Time</label>
+            <input id="time" type="time">
+
+            <label>Reason</label>
+            <textarea id="reason" placeholder="Reason for appointment"></textarea>
+
+            <button onclick="bookAppointment()">📅 Book Appointment</button>
+            <p id="appointmentMessage"></p>
+        </section>
+
+        <section class="card">
+            <h3>Veterinary Appointments</h3>
+            <div id="appointments">Loading appointments...</div>
+        </section>
+
+        <section class="card">
+            <h3>Spa & Grooming Appointment</h3>
+
+            <label>Pet</label>
+            <select id="gpet"></select>
+
+            <label>Service</label>
+            <select id="service">
+                <option>Bath</option>
+                <option>Hair Grooming</option>
+                <option>Nail Trimming</option>
+                <option>Ear Cleaning</option>
+                <option>Full Grooming</option>
+            </select>
+
+            <label>Date</label>
+            <input id="gdate" type="date">
+
+            <label>Time</label>
+            <input id="gtime" type="time">
+
+            <button onclick="bookGrooming()">✨ Book Grooming</button>
+            <p id="groomingMessage"></p>
+        </section>
+
+        <section class="card">
+            <h3>Spa & Grooming Appointments</h3>
+            <div id="grooming">Loading grooming appointments...</div>
+        </section>
+
+        <section class="card wide">
+            <h3>Selected Pet Details</h3>
+            <div id="selectedPet">Select a pet from My Pets.</div>
+        </section>
+
+        <section class="card">
+            <h3>Medical Records</h3>
+            <div id="reports">Select a pet to load medical records.</div>
+        </section>
+
+        <section class="card">
+            <h3>Vaccination History & Schedule</h3>
+            <div id="vaccines">Select a pet to load vaccination records.</div>
+        </section>
+
+        <section class="card">
+            <h3>Prescription History</h3>
+            <div id="prescriptions">Select a pet to load prescription history.</div>
+        </section>
+
+        <section class="card wide">
+            <h3>Facilities & Service History</h3>
+            <div id="facilities">Select a pet to load facility/service history.</div>
+        </section>
+
+    </div>
+</main>
+
+<script src="/js/owner.js"></script>
+</body>
+</html>
