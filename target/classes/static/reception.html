@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receptionist Dashboard</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <h2>Receptionist Dashboard</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<main>
+<div class="grid">
+
+<section class="card wide">
+  <h3>Receptionist Profile</h3>
+  <div id="receptionProfile">Loading profile...</div>
+</section>
+
+<section class="card wide">
+  <h3>Pet Owner + Pet Registration</h3>
+  <p>Register the pet owner and the pet together. Username and password are generated automatically by the system.</p>
+
+  <h4>Pet Owner Details</h4>
+  <input id="ownerName" placeholder="Owner full name *">
+  <input id="ownerAddress" placeholder="Address">
+  <input id="ownerPhone" placeholder="Phone *">
+  <input id="ownerEmail" type="email" placeholder="Email">
+
+  <h4>Pet Details</h4>
+  <input id="petName" placeholder="Pet name *">
+  <input id="petSpecies" placeholder="Species *">
+  <input id="petBreed" placeholder="Breed">
+  <input id="petGender" placeholder="Gender">
+  <input id="petAge" type="number" min="0" placeholder="Age">
+  <input id="petWeight" type="number" min="0" step="0.1" placeholder="Weight (kg)">
+  <input id="petColor" placeholder="Color">
+  <input id="petAllergies" placeholder="Allergies">
+  <input id="petConditions" placeholder="Medical conditions">
+
+  <select id="petVet"></select>
+
+  <button onclick="registerOwnerAndPet()">Register Owner + Pet</button>
+  <p id="registrationMsg"></p>
+  <div id="generatedCredentials"></div>
+</section>
+
+<section class="card wide">
+  <h3>Veterinarian Availability</h3>
+  <div id="veterinarianAvailability">Loading...</div>
+</section>
+
+<section class="card">
+  <h3>Update Veterinarian Availability</h3>
+  <select id="availabilityVet"></select>
+  <input id="availabilityDate" type="date">
+  <select id="availabilityStatus">
+    <option value="AVAILABLE">AVAILABLE</option>
+    <option value="PRESENT">PRESENT</option>
+    <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+    <option value="ABSENT">ABSENT</option>
+    <option value="LEAVE">LEAVE</option>
+  </select>
+  <button onclick="saveAvailability()">Save Availability</button>
+  <p id="availabilityMsg"></p>
+</section>
+
+<section class="card wide">
+  <h3>All Registered Pets</h3>
+  <input id="petSearch" placeholder="Search Pet ID, Pet Name or Owner Name" oninput="loadPets()">
+  <div id="petsList">Loading...</div>
+</section>
+
+<section class="card wide">
+  <h3>All Pet Owners</h3>
+  <div id="ownersList">Loading...</div>
+</section>
+
+<section class="card wide">
+  <h3>This Week's Veterinarian Appointments</h3>
+  <div id="weeklyAppointments">Loading...</div>
+</section>
+
+<section class="card wide">
+  <h3>This Week's Spa & Grooming Appointments</h3>
+  <div id="weeklyGrooming">Loading...</div>
+</section>
+
+<section class="card wide">
+  <h3>Operations Scheduled - This Week</h3>
+  <div id="operations">Loading...</div>
+</section>
+
+<section class="card wide">
+  <h3>Medical Records - View Only</h3>
+  <div id="medicalRecords">Loading...</div>
+</section>
+
+<section class="card">
+  <h3>Schedule Operation</h3>
+  <input id="operationPet" placeholder="PET-000001">
+  <select id="operationVet"></select>
+  <input id="operationType" placeholder="Operation type">
+  <input id="operationDate" type="date">
+  <input id="operationTime" type="time">
+  <select id="operationStatus">
+    <option>SCHEDULED</option>
+    <option>COMPLETED</option>
+    <option>CANCELLED</option>
+  </select>
+  <textarea id="operationNotes" placeholder="Notes"></textarea>
+  <button onclick="createOperation()">Schedule Operation</button>
+  <p id="operationMsg"></p>
+</section>
+
+</div>
+</main>
+
+<script src="/js/reception.js"></script>
+</body>
+</html>
