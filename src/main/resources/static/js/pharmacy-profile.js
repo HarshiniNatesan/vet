@@ -1,0 +1,1 @@
+shellInit();$('profileUser').textContent=username||'—';

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Hospital Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css"></head>
+
+
+<body>
+
+<header>
+
+    <h2 id="title">
+        Hospital Dashboard
+    </h2>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main>
+
+    <div class="grid">
+
+
+        <section class="card">
+
+            <h3>Dashboard Overview</h3>
+
+            <p>
+                Welcome to the Veterinary Hospital
+                Management System.
+            </p>
+
+            <p id="roleDescription"></p>
+
+        </section>
+
+
+        <section class="card">
+
+            <h3>Available Modules</h3>
+
+            <ul id="modules">
+
+            </ul>
+
+        </section>
+
+
+        <section class="card wide">
+
+            <h3>System Information</h3>
+
+            <p>
+                This system provides centralized
+                management of veterinary hospital
+                operations, appointments, pets,
+                medical records and pharmacy services.
+            </p>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+const role =
+    new URLSearchParams(location.search).get("role");
+
+
+const title =
+    document.getElementById("title");
+
+
+const description =
+    document.getElementById("roleDescription");
+
+
+const modules =
+    document.getElementById("modules");
+
+
+const roleData = {
+
+    ADMIN: {
+
+        title: "Administrator Dashboard",
+
+        description:
+            "Manage users, veterinarians, pet owners and hospital operations.",
+
+        modules: [
+            "User Management",
+            "Veterinarian Management",
+            "Pet Owner Management",
+            "Hospital Statistics",
+        ]
+
+    },
+
+
+    RECEPTIONIST: {
+
+        title: "Receptionist Dashboard",
+
+        description:
+            "Manage registrations, appointments and grooming services.",
+
+        modules: [
+            "Pet Registration",
+            "Owner Registration",
+            "Appointment Management",
+            "Veterinarian Allocation",
+            "Grooming Management"
+        ]
+
+    },
+
+
+    PHARMACY: {
+
+        title: "Pharmacy Dashboard",
+
+        description:
+            "Manage medicines, prescriptions and pharmacy inventory.",
+
+        modules: [
+            "Medicine Stock",
+            "Prescriptions",
+            "Medicine Dispensing",
+            "Low Stock Alerts",
+            "Pharmacy Records"
+        ]
+
+    }
+
+};
+
+
+const data =
+    roleData[role] || {
+
+        title: "Hospital Dashboard",
+
+        description:
+            "Welcome to the Veterinary Hospital Management System.",
+
+        modules: []
+
+    };
+
+
+title.textContent = data.title;
+
+
+description.textContent = data.description;
+
+
+modules.innerHTML =
+    data.modules
+        .map(item => `<li>${item}</li>`)
+        .join("");
+
+
+function logout() {
+
+    localStorage.clear();
+
+    location = "/login.html";
+
+}
+
+</script>
+
+<script src="/js/shell.js" defer></script></body>
+
+</html>

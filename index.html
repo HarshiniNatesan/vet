@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Veterinary Hospital Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dff5e1, #b9e4c9);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 400px;
+            padding: 35px;
+            background-color: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 50px;
+        }
+
+        h1 {
+            color: #1f6b3b;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #27864b;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 8px;
+            background-color: #27864b;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #185d32;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #27864b;
+            text-decoration: none;
+            margin: 8px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">🐾</div>
+
+        <h1>VetCare Hospital</h1>
+
+        <p class="subtitle">
+            Veterinary Hospital Management System
+        </p>
+
+        <form onsubmit="loginUser(event)">
+
+            <!-- User Role -->
+
+            <label>Select Your Role</label>
+
+            <select id="role" required>
+
+                <option value="">
+                    -- Select Role --
+                </option>
+
+                <option value="administrator">
+                    Administrator
+                </option>
+
+                <option value="doctor">
+                    Doctor
+                </option>
+
+                <option value="receptionist">
+                    Receptionist
+                </option>
+
+                <option value="petowner">
+                    Pet Owner
+                </option>
+
+                <option value="pharmacist">
+                    Pharmacist
+                </option>
+
+            </select>
+
+
+            <!-- Username -->
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+
+
+            <!-- Password -->
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+
+            <!-- Login Button -->
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- Login Message -->
+
+        <p id="message"></p>
+
+
+        <!-- Other Links -->
+
+        <div class="links">
+
+            <a href="#">
+                Forgot Password?
+            </a>
+
+            <a href="#">
+                New Pet Owner? Register
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function loginUser(event) {
+
+            event.preventDefault();
+
+
+            // Get values entered by the user
+
+            let role =
+                document.getElementById("role").value;
+
+            let username =
+                document.getElementById("username").value;
+
+            let password =
+                document.getElementById("password").value;
+
+            let message =
+                document.getElementById("message");
+
+
+            // Sample login details
+
+            if (
+                role === "administrator" &&
+                username === "admin" &&
+                password === "admin123"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Administrator Login Successful!";
+
+                // Redirect to administrator dashboard
+
+                // window.location.href =
+                // "admin_dashboard.html";
+
+            }
+
+
+            else if (
+                role === "doctor" &&
+                username === "doctor" &&
+                password === "doctor123"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Doctor Login Successful!";
+
+                // window.location.href =
+                // "doctor_dashboard.html";
+
+            }
+
+
+            else if (
+                role === "receptionist" &&
+                username === "receptionist" &&
+                password === "reception123"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Receptionist Login Successful!";
+
+                // window.location.href =
+                // "receptionist_dashboard.html";
+
+            }
+
+
+            else if (
+                role === "petowner" &&
+                username === "petowner" &&
+                password === "pet123"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Pet Owner Login Successful!";
+
+                // window.location.href =
+                // "petowner_dashboard.html";
+
+            }
+
+
+            else if (
+                role === "pharmacist" &&
+                username === "pharmacist" &&
+                password === "pharma123"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Pharmacist Login Successful!";
+
+                // window.location.href =
+                // "pharmacist_dashboard.html";
+
+            }
+
+
+            else {
+
+                message.style.color = "red";
+
+                message.innerHTML =
+                    "Invalid role, username, or password!";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

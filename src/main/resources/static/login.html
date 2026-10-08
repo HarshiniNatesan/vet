@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | PawsCare Veterinary Hospital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+<div class="auth-page">
+
+    <section class="auth-aside">
+        <div class="auth-brand">
+            <div class="brand-mark" data-icon="paw"></div>
+            <span>PawsCare</span>
+        </div>
+
+        <div class="auth-hero">
+            <h1>Veterinary care, managed in one place.</h1>
+            <p>Appointments, medical records, prescriptions and pharmacy, connected for every team at the hospital.</p>
+            <ul class="auth-points">
+                <li><span data-icon="calendar"></span>Appointments and patient records</li>
+                <li><span data-icon="pill"></span>Prescriptions and pharmacy stock</li>
+                <li><span data-icon="building"></span>Built for multi-branch hospitals</li>
+            </ul>
+        </div>
+
+        <div class="auth-foot">PawsCare Veterinary Hospital Management System</div>
+    </section>
+
+    <section class="auth-main">
+        <div class="auth-card">
+            <h2>Welcome back</h2>
+            <p class="sub">Sign in to open your workspace.</p>
+
+            <div class="form-group">
+                <label for="role">Sign in as</label>
+                <select id="role">
+                    <option value="PET_OWNER">Pet Owner</option>
+                    <option value="ADMIN">Administrator</option>
+                    <option value="RECEPTIONIST">Receptionist</option>
+                    <option value="VETERINARIAN">Veterinarian</option>
+                    <option value="PHARMACY">Pharmacy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" placeholder="Enter your username" autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Show or hide password" data-icon="eye"></button>
+                </div>
+            </div>
+
+            <button type="button" class="login-button" onclick="login()">Sign in</button>
+
+            <p id="msg" class="login-message" role="alert"></p>
+
+            <div class="demo-box">
+                <strong>Demo accounts</strong>
+                <div>Pet Owner: <b>owner1</b> / owner123</div>
+                <div>Veterinarian: <b>doctor1</b> / doctor123</div>
+                <div>Admin: <b>admin</b> / admin123</div>
+                <div>Reception: <b>reception</b> / reception123</div>
+                <div>Pharmacy: <b>pharmacy</b> / pharmacy123</div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="/js/login.js"></script>
+<script src="/js/shell.js" defer></script>
+<script>
+    function togglePassword() {
+        var p = document.getElementById("password");
+        p.type = p.type === "password" ? "text" : "password";
+    }
+</script>
+</body>
+</html>

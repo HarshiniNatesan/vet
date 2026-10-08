@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Receptionist Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css"></head>
+<body class="focused" data-show="8">
+<div class="role-shell"><aside class="role-sidebar"><div class="role-brand">PawsCare</div><div class="role-sub">RECEPTIONIST WORKSPACE</div><nav class="role-nav"><a href="/reception.html">Dashboard</a><a href="/reception-1.html">Register Pet &amp; Owner</a><a href="/reception-2.html">Veterinarian Availability</a><a href="/reception-3.html">Pet Management</a><a href="/reception-4.html">Owner Management</a><a href="/reception-5.html">Appointments</a><a href="/reception-6.html">Grooming Appointments</a><a href="/reception-7.html">Operations</a><a class="active" href="/reception-8.html">Records</a><a href="/reception-statistics.html">Statistics</a></nav><button class="role-logout" onclick="logout()">Sign out</button></aside><main class="role-main"><header class="role-top"><div><h1>Records</h1></div></header>
+<div class="grid">
+<section class="card wide" style="display:none!important">
+<h3>Receptionist Profile</h3>
+<div id="receptionProfile">Loading profile...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>Pet Owner + Pet Registration</h3>
+<p>Register the pet owner and the pet together. Username and password are generated automatically by the system.</p>
+<h4>Pet Owner Details</h4>
+<input id="ownerName" placeholder="Owner full name *"/>
+<input id="ownerAddress" placeholder="Address"/>
+<input id="ownerPhone" placeholder="Phone *"/>
+<input id="ownerEmail" placeholder="Email" type="email"/>
+<h4>Pet Details</h4>
+<input id="petName" placeholder="Pet name *"/>
+<input id="petSpecies" placeholder="Species *"/>
+<input id="petBreed" placeholder="Breed"/>
+<input id="petGender" placeholder="Gender"/>
+<input id="petAge" min="0" placeholder="Age" type="number"/>
+<input id="petWeight" min="0" placeholder="Weight (kg)" step="0.1" type="number"/>
+<input id="petColor" placeholder="Color"/>
+<input id="petAllergies" placeholder="Allergies"/>
+<input id="petConditions" placeholder="Medical conditions"/>
+<select id="petVet"></select>
+<button onclick="registerOwnerAndPet()">Register Owner + Pet</button>
+<p id="registrationMsg"></p>
+<div id="generatedCredentials"></div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>Veterinarian Availability</h3>
+<div id="veterinarianAvailability">Loading...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Update Veterinarian Availability</h3>
+<select id="availabilityVet"></select>
+<input id="availabilityDate" type="date"/>
+<select id="availabilityStatus">
+<option value="AVAILABLE">AVAILABLE</option>
+<option value="PRESENT">PRESENT</option>
+<option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+<option value="ABSENT">ABSENT</option>
+<option value="LEAVE">LEAVE</option>
+</select>
+<button onclick="saveAvailability()">Save Availability</button>
+<p id="availabilityMsg"></p>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>All Registered Pets</h3>
+<input id="petSearch" oninput="loadPets()" placeholder="Search Pet ID, Pet Name or Owner Name"/>
+<div id="petsList">Loading...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>All Pet Owners</h3>
+<div id="ownersList">Loading...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>This Week's Veterinarian Appointments</h3>
+<div id="weeklyAppointments">Loading...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>This Week's Spa &amp; Grooming Appointments</h3>
+<div id="weeklyGrooming">Loading...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>Operations Scheduled - This Week</h3>
+<div id="operations">Loading...</div>
+</section>
+<section class="card wide">
+<h3>Medical Records - View Only</h3>
+<div id="medicalRecords">Loading...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Schedule Operation</h3>
+<label>Patient / Pet<input id="operationPet" list="patientOptions" placeholder="Search Pet ID, Pet Name or Owner Name" autocomplete="off"/><datalist id="patientOptions"></datalist></label>
+<select id="operationVet"></select>
+<input id="operationType" placeholder="Operation type"/>
+<input id="operationDate" type="date"/>
+<input id="operationTime" type="time"/>
+<select id="operationStatus">
+<option>SCHEDULED</option>
+<option>COMPLETED</option>
+<option>CANCELLED</option>
+</select>
+<textarea id="operationNotes" placeholder="Notes"></textarea>
+<button onclick="createOperation()">Schedule Operation</button>
+<p id="operationMsg"></p>
+</section>
+</div>
+</main></div>
+<script src="/js/reception.js"></script>
+<script src="/js/shell.js" defer></script></body>
+</html>
