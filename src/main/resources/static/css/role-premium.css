@@ -1,0 +1,79 @@
+/* Professional role workspace */
+:root{--ink:#172033;--muted:#667085;--line:#e8edf3;--brand:#1d4ed8;--surface:#fff;--bg:#f5f7fb}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}.role-shell{display:flex;min-height:100vh}.role-sidebar{position:fixed;inset:0 auto 0 0;width:260px;background:#111a2e;color:#fff;padding:24px 16px;display:flex;flex-direction:column}.role-brand{font-size:22px;font-weight:800;padding:8px 12px}.role-sub{color:#aab7cf;font-size:12px;padding:0 12px 24px}.role-nav{display:flex!important;flex-direction:column!important;gap:5px!important;overflow:auto}.role-nav a{color:#c9d3e7!important;text-decoration:none!important;padding:12px 14px!important;border-radius:10px!important;font-size:14px!important}.role-nav a:hover,.role-nav a.active{background:#26395f!important;color:#fff!important}.role-main{margin-left:260px;width:calc(100% - 260px);padding:34px}.role-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}.role-top h1{margin:0 0 7px;font-size:30px}.role-top p{margin:0;color:var(--muted)}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}.summary-card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink);box-shadow:0 8px 30px rgba(16,24,40,.05);transition:.2s}.summary-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(16,24,40,.12);border-color:#b9c8ea}.summary-card .icon{font-size:25px;margin-bottom:18px}.summary-card h3{margin:0 0 7px;font-size:16px}.summary-card p{margin:0;color:var(--muted);font-size:13px}.role-logout{margin-top:auto;background:transparent;border:1px solid #455575;color:#fff;border-radius:9px;padding:10px;cursor:pointer}@media(max-width:800px){.role-sidebar{position:static;width:100%;min-height:auto}.role-shell{display:block}.role-main{margin-left:0;width:100%;padding:22px}.role-nav{flex-direction:row!important;flex-wrap:wrap!important}.role-top{align-items:flex-start;gap:12px;flex-direction:column}}
+
+/* Application-wide spacing and professional form rhythm */
+main .grid{gap:28px!important;align-items:start}
+.card{padding:28px!important}
+.card h3{margin:0 0 18px!important}
+.card h4{margin:28px 0 14px!important}
+.card input,.card select,.card textarea{margin:0 0 16px!important;min-height:46px!important}
+.card textarea{min-height:110px!important;padding:13px!important;resize:vertical}
+.card button{margin:8px 12px 8px 0!important;min-height:44px!important}
+.item,.list-item{margin:14px 0!important;padding:18px!important}
+.card table{margin-top:18px!important}
+.card .form-row,.card .form-grid{gap:18px!important;margin-bottom:18px!important}
+.page-banner{margin-bottom:22px!important}
+.back-link{display:inline-block;margin:0 0 22px!important}
+#generatedCredentials{margin-top:20px!important}
+@media(max-width:700px){.card{padding:20px!important}main .grid{gap:20px!important}}
+
+
+/* Professional page spacing update */
+.role-main{padding:36px 42px}.role-top{margin-bottom:28px}.role-top p{display:none}
+.content-card{background:#fff;border:1px solid #e8edf3;border-radius:16px;padding:28px;margin-bottom:28px;box-shadow:0 8px 24px rgba(31,45,61,.06)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px 26px}.form-grid label{display:flex;flex-direction:column;gap:9px;font-weight:600}.form-grid input,.form-grid select,.form-grid textarea{padding:12px 14px;border:1px solid #d7dee7;border-radius:9px;font:inherit}.form-actions{margin-top:26px;display:flex;gap:14px}.primary-btn{padding:12px 20px;border:0;border-radius:9px;background:#23395d;color:#fff;cursor:pointer}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:14px 12px;border-bottom:1px solid #e8edf3;text-align:left}.section-title{margin:0 0 20px}.notice{margin-top:16px;padding:12px;border-radius:8px}.error{background:#fee2e2}.success{background:#dcfce7}
+
+.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}.edit-modal{background:#fff;width:min(760px,96vw);max-height:90vh;overflow:auto;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25)}.secondary-btn{padding:10px 16px;border:1px solid #ccc;background:#fff;border-radius:8px;cursor:pointer}
+
+
+/* Unified workspace design across Administration, Reception, Veterinarian and Pet Owner */
+body.focused{background:var(--bg)!important;color:var(--ink)}
+body.focused>header{position:fixed;inset:0 auto 0 0;width:260px;min-height:100vh;height:100vh;padding:24px 16px;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;background:#111a2e;box-shadow:none;z-index:1000}
+body.focused>header h2{font-size:22px;margin:8px 12px 26px;color:#fff;letter-spacing:.1px}
+body.focused>header .role-nav{display:flex!important;flex-direction:column!important;gap:5px!important;overflow:auto;margin:0}
+body.focused>header .role-nav a{display:block;color:#c9d3e7!important;text-decoration:none!important;padding:12px 14px!important;border-radius:10px!important;font-size:14px!important;background:transparent}
+body.focused>header .role-nav a:hover,body.focused>header .role-nav a.active{background:#26395f!important;color:#fff!important}
+body.focused>header>button{margin-top:auto;background:transparent;border:1px solid #455575;color:#fff;border-radius:9px;padding:10px;cursor:pointer}
+body.focused>.page-banner{margin:0 0 0 260px;padding:36px 42px 20px;background:transparent;box-shadow:none;border:0}
+body.focused>.page-banner .inner{max-width:none;padding:0}
+body.focused>.page-banner h1{color:var(--ink);font-size:30px;margin:0 0 7px}
+body.focused>.page-banner p{color:var(--muted);margin:0}
+body.focused>main{margin-left:260px;padding:0 42px 42px;max-width:none}
+body.focused>main .grid{max-width:none}
+body.focused .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(31,45,61,.06)}
+body.focused .card button{border-radius:9px}
+body.focused .card h3{color:var(--ink)}
+body.focused .card p{color:var(--muted)}
+body.focused table{background:#fff}
+body.focused th{color:#475467;font-weight:700;background:#f8fafc}
+body.focused td{color:#344054}
+body.focused .grid{gap:28px!important}
+body.focused .page-banner+main{padding-top:0}
+body.focused .hidden{display:none!important}
+
+@media(max-width:800px){
+ body.focused>header{position:static;width:100%;height:auto;min-height:auto;padding:18px}
+ body.focused>header h2{margin:4px 8px 16px}
+ body.focused>header .role-nav{flex-direction:row!important;flex-wrap:wrap}
+ body.focused>header>button{margin-top:14px}
+ body.focused>.page-banner,body.focused>main{margin-left:0;padding-left:22px;padding-right:22px}
+}
+
+/* Align Pharmacy workspace with the same shell proportions */
+.pharmacy-ui{background:var(--bg)!important;color:var(--ink)!important}
+.pharmacy-ui .ph-sidebar{width:260px!important;background:#111a2e!important;padding:24px 16px!important}
+.pharmacy-ui .ph-main{margin-left:260px!important;width:calc(100% - 260px)!important;padding:36px 42px!important}
+.pharmacy-ui .ph-nav{gap:5px!important}
+.pharmacy-ui .ph-nav a{border-radius:10px!important}
+.pharmacy-ui .panel,.pharmacy-ui .action-card{border-radius:16px!important}
+@media(max-width:800px){.pharmacy-ui .ph-sidebar{width:100%!important}.pharmacy-ui .ph-main{margin-left:0!important;width:100%!important;padding:22px!important}}
+.dashboard-link{text-decoration:none;display:inline-flex;align-items:center}
+.small{padding:7px 11px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer}
+
+.chart-wrap{width:100%;overflow-x:auto;margin-top:12px;padding:8px 0}
+.chart-wrap canvas{display:block;max-width:100%;min-width:420px}
+.chart-message{margin-top:10px;color:#6b7280;font-size:.92rem}
+.trend-controls{display:flex;align-items:flex-end;gap:12px}
+.trend-controls label{min-width:140px}
+.trend-controls select{margin-top:6px}
+@media(max-width:700px){.chart-wrap canvas{min-width:560px}.trend-controls{width:100%}}

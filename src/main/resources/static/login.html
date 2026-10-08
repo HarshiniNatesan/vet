@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Veterinary Hospital | Login</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-background">
+
+        <div class="login-overlay"></div>
+
+        <div class="login-wrapper">
+
+            <div class="login-brand">
+                <div class="paw-logo">PawsCare</div>
+
+                <h1>Veterinary Hospital</h1>
+
+                <p>
+                    Caring for pets. Supporting owners.<br>
+                    Delivering better veterinary care.
+                </p>
+            </div>
+
+
+            <div class="login-card">
+
+                <div class="login-card-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your dashboard</p>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="role">Login As</label>
+
+                    <select id="role">
+
+                        <option value="PET_OWNER">
+                            PawsCare Pet Owner
+                        </option>
+
+                        <option value="ADMIN">
+                            🛡️ Administrator
+                        </option>
+
+                        <option value="RECEPTIONIST">
+                            📋 Receptionist
+                        </option>
+
+                        <option value="VETERINARIAN">
+                            Save Medical Record Veterinarian
+                        </option>
+
+                        <option value="PHARMACY">
+                            💊 Pharmacy
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="username">Username</label>
+
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">Password</label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="login-button"
+                    onclick="login()"
+                >
+                    Login
+                </button>
+
+
+                <p id="msg" class="login-message"></p>
+
+
+                <div class="demo-box">
+
+                    <strong>Demo Accounts</strong>
+
+                    <div>Pet Owner: <b>owner1</b> / owner123</div>
+                    <div>Veterinarian: <b>doctor1</b> / doctor123</div>
+                    <div>Admin: <b>admin</b> / admin123</div>
+                    <div>Reception: <b>reception</b> / reception123</div>
+                    <div>Pharmacy: <b>pharmacy</b> / pharmacy123</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/login.js"></script>
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            password.type =
+                password.type === "password"
+                    ? "text"
+                    : "password";
+
+        }
+
+    </script>
+
+</body>
+</html>

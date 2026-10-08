@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pet Owner Dashboard</title>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/role-premium.css" rel="stylesheet"/>
+</head>
+<body class="focused" data-show="5">
+<header>
+<h2>Pet Owner Dashboard</h2>
+<nav class="role-nav"><a href="/owner.html">Dashboard</a><a href="/owner-1.html">Pets</a><a href="/owner-2.html">Appointments</a><a href="/owner-3.html">Medical Records</a><a href="/owner-4.html">Prescriptions</a><a class="active" href="/owner-5.html">Vaccinations</a><a href="/owner-6.html">Grooming</a><a href="/owner-7.html">Profile</a><a href="/owner-8.html">Change Password</a></nav><button onclick="logout()">Logout</button>
+</header><div class="page-banner"><div class="inner"><h1>Vaccinations</h1><p>Manage and review vaccinations from a dedicated workspace.</p></div></div>
+<main>
+<div class="grid">
+<section class="card" style="display:none!important">
+<h3>My Pets</h3>
+<div id="pets">Loading pets...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Available Veterinarians</h3>
+<div id="doctors">Loading veterinarians...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Book Veterinarian Appointment</h3>
+<label>Pet</label>
+<select id="pet"><option value="">Select pet</option></select>
+<label>Veterinarian</label>
+<select id="vet"><option value="">Select veterinarian</option></select>
+<label>Date</label>
+<input id="date" type="date"/>
+<label>Time</label>
+<input id="time" type="time"/>
+<label>Reason</label>
+<textarea id="reason" placeholder="Reason for appointment"></textarea>
+<button onclick="bookAppointment()">Book Appointment Book Appointment</button>
+<p id="appointmentMessage"></p>
+</section>
+<section class="card" style="display:none!important">
+<h3>Veterinary Appointments</h3>
+<div id="appointments">Loading appointments...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Spa &amp; Grooming Appointment</h3>
+<label>Pet</label>
+<select id="gpet"><option value="">Select pet</option></select>
+<label>Service</label>
+<select id="service">
+<option>Bath</option>
+<option>Hair Grooming</option>
+<option>Nail Trimming</option>
+<option>Ear Cleaning</option>
+<option>Full Grooming</option>
+</select>
+<label>Date</label>
+<input id="gdate" type="date"/>
+<label>Time</label>
+<input id="gtime" type="time"/>
+<button onclick="bookGrooming()">Book Grooming Book Grooming</button>
+<p id="groomingMessage"></p>
+</section>
+<section class="card" style="display:none!important">
+<h3>Spa &amp; Grooming Appointments</h3>
+<div id="grooming">Loading grooming appointments...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>Selected Pet Details</h3>
+<div id="selectedPet">Select a pet from My Pets.</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Medical Records</h3>
+<div id="reports">Select a pet to load medical records.</div>
+</section>
+<section class="card">
+<h3>Vaccination History &amp; Schedule</h3>
+<div id="vaccines">Select a pet to load vaccination records.</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Prescription History</h3>
+<div id="prescriptions">Select a pet to load prescription history.</div>
+</section>
+
+</div>
+</main>
+<script src="/js/owner.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Veterinarian Dashboard</title>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/role-premium.css" rel="stylesheet"/>
+</head>
+<body class="focused" data-show="3">
+<header>
+<h2>Veterinarian Dashboard</h2>
+<nav class="role-nav"><a href="/vet.html">Dashboard</a><a href="/vet-1.html">Appointments</a><a href="/vet-2.html">Patients</a><a class="active" href="/vet-3.html">Medical Records</a><a href="/vet-4.html">Prescriptions</a><a href="/vet-5.html">Vaccinations</a><a href="/vet-6.html">Availability</a><a href="/vet-7.html">Profile</a><a href="/vet-statistics.html">Statistics</a></nav><button onclick="logout()">Logout</button>
+</header><div class="page-banner"><div class="inner"><h1>Medical Records</h1><p>Manage and review medical records from a dedicated workspace.</p></div></div>
+<main>
+<div class="grid">
+<section class="card wide" style="display:none!important">
+<h3>Logged-in Veterinarian</h3>
+<div id="vetProfile">Loading doctor details...</div>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>My Appointments</h3>
+<div id="appointments">Loading appointments...</div>
+</section>
+<section class="card" style="display:none!important">
+<h3>My Allotted Patients</h3>
+<div id="patients">Loading patients...</div>
+<hr/>
+<label>Search Patient by Pet ID</label>
+<input id="searchPetId" placeholder="Search Pet ID, Pet Name or Owner Name"/>
+<button onclick="searchPet()">
+                Search Patients
+            </button>
+<p id="searchMessage"></p>
+<div id="searchResults"></div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Pet Details</h3>
+<div id="petDetails">
+                Search for a patient using the search bar above.
+            </div>
+</section>
+<section class="card wide">
+<h3>Medical Records</h3>
+<div id="medicalHistory">
+                Search for and select a patient above.
+            </div>
+</section>
+<section class="card">
+<h3>Add / Update Medical Record</h3>
+<input id="reportId" type="hidden"/>
+<label>Pet ID</label>
+<input id="petId" placeholder="PET-000001"/>
+<label>Visit Date</label>
+<input id="visitDate" type="date"/>
+<textarea id="symptoms" placeholder="Symptoms"></textarea>
+<textarea id="observations" placeholder="Clinical observations"></textarea>
+<textarea id="diagnosis" placeholder="Diagnosis"></textarea>
+<textarea id="treatment" placeholder="Treatment"></textarea>
+<input id="followUpDate" type="date"/>
+<label>
+<input id="surgery" style="width:auto" type="checkbox"/>
+                Surgery required
+            </label>
+<textarea id="surgeryDetails" placeholder="Surgery details"></textarea>
+<textarea id="notes" placeholder="Notes"></textarea>
+<button onclick="saveMedicalRecord()">
+                Save Medical Record Save Medical Record
+            </button>
+<button onclick="clearMedicalForm()">
+                Clear
+            </button>
+</section>
+<section class="card wide" style="display:none!important">
+<h3>Vaccination History &amp; Schedule</h3>
+<div id="vaccinationList">
+                Search for and select a patient above.
+            </div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Add / Update Vaccination</h3>
+<input id="vaccinationId" type="hidden"/>
+<input id="vaccPetId" placeholder="PET-000001"/>
+<input id="vaccineName" placeholder="Vaccine name"/>
+<input id="vaccineType" placeholder="Vaccine type/category"/>
+<label>Date Given</label>
+<input id="administeredDate" type="date"/>
+<label>Next Due Date</label>
+<input id="nextDueDate" type="date"/>
+<select id="vaccineStatus">
+<option value="PENDING">PENDING</option>
+<option value="COMPLETED">COMPLETED</option>
+<option value="OVERDUE">OVERDUE</option>
+</select>
+<textarea id="vaccineNotes" placeholder="Vaccination notes"></textarea>
+<button onclick="saveVaccination()">
+                💉 Save Vaccination
+            </button>
+<button onclick="clearVaccinationForm()">
+                Clear
+            </button>
+</section>
+<section class="card" style="display:none!important">
+<h3>Prescription History</h3>
+<div id="prescriptionList">
+                Search for and select a patient above.
+            </div>
+</section>
+<section class="card" style="display:none!important">
+<h3>Add Prescription</h3>
+<input id="ppId" placeholder="PET-000001"/>
+<input id="medicine" placeholder="Medicine name"/>
+<input id="dosage" placeholder="Dosage"/>
+<input id="frequency" placeholder="Frequency"/>
+<input id="duration" placeholder="Duration"/>
+<textarea id="instructions" placeholder="Instructions"></textarea>
+<button onclick="prescribe()">
+                💊 Save Prescription
+            </button>
+</section>
+
+</div>
+</main>
+<script src="/js/vet.js"></script>
+</body>
+</html>
