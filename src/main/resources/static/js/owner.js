@@ -102,9 +102,6 @@ function renderPets(ps) {
             <br>Medical Conditions:
             ${esc(p.medicalConditions || "None")}
             <br>
-            <button onclick="loadPetInfo(${p.id})">
-                View Pet Records
-            </button>
         </div>
     `).join("");
 
@@ -196,6 +193,7 @@ async function loadAppointments() {
 
                 Reason:
                 ${esc(a.reason || "-")}<br>
+                <button onclick="location.href='/owner-payments.html?appointmentId=${encodeURIComponent(a.id)}'">Pay Consultation</button>
 
                 ${
                     a.status !== "COMPLETED" &&
@@ -285,7 +283,7 @@ async function loadPetInfo(id) {
             api(`/api/owner/prescriptions/${encodeURIComponent(user)}/${id}`)
         ]);
 
-        renderMedicalRecords(rs);
+        renderMedicalRecords(rs, id);
         renderVaccinations(vs);
         renderPrescriptions(psx);
 
@@ -294,8 +292,9 @@ async function loadPetInfo(id) {
     }
 }
 
-function renderMedicalRecords(records) {
-    document.getElementById("reports").innerHTML =
+function renderMedicalRecords(records, petId) {
+    const downloadBar = petId ? `<div class="records-download" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px"><button type="button" id="downloadRecordsBtn" onclick="downloadPetReport(${Number(petId)})">Download medical records (PDF)</button><span id="downloadRecordsMsg" class="error" role="status" aria-live="polite"></span></div>` : "";
+    document.getElementById("reports").innerHTML = downloadBar +
         records.map(r => `
             <div class="item">
                 <b>Visit:
@@ -565,6 +564,38 @@ document.getElementById("gdate").addEventListener(
         }
     }
 );
+
+async function generatePetQR(id) {
+    try {
+        const data = await api(`/api/pet-reports/pets/${id}/qr`, {method: "POST"});
+        const w = window.open("", "_blank");
+        if (!w) { alert("Please allow pop-ups to view the QR code."); return; }
+        w.document.write(`<html><head><title>Pet Report QR</title></head><body style="font-family:Arial;text-align:center"><h2>${esc(data.petCode)}</h2><p>Scan to open this pet's secure report.</p><img src="${data.imageDataUrl}" style="max-width:420px"><p>Expires: ${esc(data.expiresAt)}</p></body></html>`);
+        w.document.close();
+    } catch(e) { alert(e.message); }
+}
+
+async function downloadPetReport(id) {
+    const btn = document.getElementById("downloadRecordsBtn"), msg = document.getElementById("downloadRecordsMsg");
+    if (msg) msg.textContent = "";
+    if (btn) btn.disabled = true;
+    try {
+        const r = await fetch(`/api/pet-reports/pets/${id}/pdf`, {credentials: "same-origin"});
+        if (!r.ok) {
+            let m = "Unable to download the records. Please try again.";
+            try { const d = JSON.parse(await r.text()); if (d && d.message) m = d.message; } catch (_) {}
+            throw new Error(m);
+        }
+        const blob = await r.blob(), url = URL.createObjectURL(blob), a = document.createElement("a");
+        a.href = url; a.download = `medical-records-pet-${id}.pdf`;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (e) {
+        if (msg) msg.textContent = e.message || "Unable to download the records.";
+    } finally {
+        if (btn) btn.disabled = false;
+    }
+}
 
 async function logout() {
     try {

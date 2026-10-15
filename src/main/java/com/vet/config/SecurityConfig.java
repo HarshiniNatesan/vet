@@ -57,7 +57,10 @@ public class SecurityConfig {
                     "/admin.html", "/pharmacy.html", "/vet.html",
                     "/owner.html", "/reception.html",
                     "/css/**", "/js/**", "/images/**", "/favicon.ico",
-                    "/api/auth/login"
+                    "/api/auth/login",
+                    "/public/pet-report/**",
+                    "/pet-report-view.html",
+                    "/api/payments/webhook"
                 ).permitAll()
                 .antMatchers("/api/auth/logout", "/api/auth/me").authenticated()
                 .antMatchers("/api/owner/**").hasRole("PET_OWNER")

@@ -12,6 +12,7 @@ public class Prescription {
     private String medicineName, dosage, frequency, duration;
     @Column(nullable=false) private String status = "PENDING";
     @Column(name="required_quantity") private Integer requiredQuantity = 1;
+    @ManyToOne @JoinColumn(name="branch_id") private Branch branch;
     @Column(length=2000) private String instructions;
 
     public Prescription(){}
@@ -26,4 +27,5 @@ public class Prescription {
     public String getInstructions(){return instructions;} public void setInstructions(String v){instructions=v;}
     public String getStatus(){return status;} public void setStatus(String v){status=v;}
     public Integer getRequiredQuantity(){return requiredQuantity;} public void setRequiredQuantity(Integer v){requiredQuantity=v;}
+    public Branch getBranch(){return branch;} public void setBranch(Branch v){branch=v;}
 }

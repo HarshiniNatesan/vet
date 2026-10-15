@@ -1,6 +1,7 @@
 package com.vet.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pets")
@@ -29,6 +30,12 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "veterinarian_id")
     private User assignedVeterinarian;
+
+    @Column(name="report_token_hash", unique=true, length=64)
+    private String reportTokenHash;
+    @Column(name="report_token_issued_at") private LocalDateTime reportTokenIssuedAt;
+    @Column(name="report_token_expires_at") private LocalDateTime reportTokenExpiresAt;
+    @Column(name="report_token_revoked", nullable=false) private Boolean reportTokenRevoked = false;
 
     public Pet() {}
 
@@ -75,4 +82,13 @@ public class Pet {
     public void setAssignedVeterinarian(User assignedVeterinarian) {
         this.assignedVeterinarian = assignedVeterinarian;
     }
+
+    public String getReportTokenHash(){return reportTokenHash;}
+    public void setReportTokenHash(String v){reportTokenHash=v;}
+    public LocalDateTime getReportTokenIssuedAt(){return reportTokenIssuedAt;}
+    public void setReportTokenIssuedAt(LocalDateTime v){reportTokenIssuedAt=v;}
+    public LocalDateTime getReportTokenExpiresAt(){return reportTokenExpiresAt;}
+    public void setReportTokenExpiresAt(LocalDateTime v){reportTokenExpiresAt=v;}
+    public Boolean getReportTokenRevoked(){return reportTokenRevoked;}
+    public void setReportTokenRevoked(Boolean v){reportTokenRevoked=v;}
 }

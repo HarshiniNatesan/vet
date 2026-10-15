@@ -40,12 +40,14 @@ public class ReceptionController {
 
     @GetMapping("/veterinarians")
     public List<Map<String,Object>> veterinarians() {
-        return users.findByRole(Role.VETERINARIAN).stream().map(this::vetDto).collect(Collectors.toList());
+        User staff=currentReception();
+        return users.findByRole(Role.VETERINARIAN).stream().filter(v->branchAllowed(staff.getBranch(),v.getBranch())).map(this::vetDto).collect(Collectors.toList());
     }
 
     @GetMapping("/owners")
     public List<Map<String,Object>> owners() {
-        return users.findByRole(Role.PET_OWNER).stream().map(this::ownerDto).collect(Collectors.toList());
+        User staff=currentReception();
+        return users.findByRole(Role.PET_OWNER).stream().filter(o->ownerAllowed(staff,o)).map(this::ownerDto).collect(Collectors.toList());
     }
 
     @GetMapping("/profile")
@@ -58,6 +60,7 @@ public class ReceptionController {
     @PostMapping("/owners/register-with-pet")
     @Transactional
     public Map<String,Object> registerOwnerWithPet(@RequestBody Map<String,String> body) {
+        currentReception();
         String ownerName = required(body, "ownerName");
         String ownerPhone = required(body, "ownerPhone");
         String petName = required(body, "petName");
@@ -98,7 +101,8 @@ public class ReceptionController {
         pet.setOwner(owner);
 
         if (body.get("veterinarianId") != null && !body.get("veterinarianId").trim().isEmpty()) {
-            pet.setAssignedVeterinarian(resolveVet(body.get("veterinarianId")));
+            requirePetAccess(pet);
+        pet.setAssignedVeterinarian(resolveVet(body.get("veterinarianId")));
         }
 
         pet = pets.save(pet);
@@ -134,8 +138,8 @@ public class ReceptionController {
 
     @GetMapping("/pets")
     public List<Map<String,Object>> pets(@RequestParam(required=false) String search) {
-        String q=search==null?"":search.trim().toLowerCase();
-        return pets.findAll().stream().filter(p -> q.isEmpty()
+        User staff=currentReception(); String q=search==null?"":search.trim().toLowerCase();
+        return pets.findAll().stream().filter(p->petAllowed(staff,p)).filter(p -> q.isEmpty()
                 || p.getPetCode().toLowerCase().contains(q)
                 || safe(p.getName()).toLowerCase().contains(q)
                 || safe(p.getOwner()==null?null:p.getOwner().getFullName()).toLowerCase().contains(q))
@@ -144,7 +148,9 @@ public class ReceptionController {
 
     @GetMapping("/pets/{id}")
     public Map<String,Object> pet(@PathVariable Long id) {
-        return petDto(pets.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet not found.")));
+        Pet p=pets.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet not found."));
+        requirePetAccess(p);
+        return petDto(p);
     }
 
 
@@ -152,6 +158,7 @@ public class ReceptionController {
     public Map<String,Object> updateOwner(@PathVariable Long id,@RequestBody Map<String,String> body) {
         User owner=users.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet owner not found."));
         if(owner.getRole()!=Role.PET_OWNER) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Not a pet owner.");
+        if(!ownerAllowed(currentReception(),owner)) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Owner belongs to another branch.");
         if(body.containsKey("fullName") && !body.get("fullName").trim().isEmpty()) owner.setFullName(body.get("fullName").trim());
         if(body.containsKey("email")) owner.setEmail(body.get("email"));
         if(body.containsKey("phone")) owner.setPhone(body.get("phone"));
@@ -162,6 +169,7 @@ public class ReceptionController {
     @PutMapping("/pets/{id}")
     public Map<String,Object> updatePet(@PathVariable Long id,@RequestBody Map<String,String> body) {
         Pet pet=pets.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet not found."));
+        requirePetAccess(pet);
         if(body.containsKey("name") && !body.get("name").trim().isEmpty()) pet.setName(body.get("name").trim());
         if(body.containsKey("species")) pet.setSpecies(body.get("species"));
         if(body.containsKey("breed")) pet.setBreed(body.get("breed"));
@@ -179,22 +187,23 @@ public class ReceptionController {
     @GetMapping("/appointments/week")
     public List<Map<String,Object>> weeklyAppointments() {
         LocalDate[] w=week();
-        return appointments.findByAppointmentDateBetweenOrderByAppointmentDateAscAppointmentTimeAsc(w[0],w[1])
-                .stream().map(this::appointmentDto).collect(Collectors.toList());
+        User staff=currentReception(); return appointments.findByAppointmentDateBetweenOrderByAppointmentDateAscAppointmentTimeAsc(w[0],w[1])
+                .stream().filter(a->branchAllowed(staff.getBranch(),a.getBranch())).map(this::appointmentDto).collect(Collectors.toList());
     }
 
     @GetMapping("/grooming/week")
     public List<Map<String,Object>> weeklyGrooming() {
         LocalDate[] w=week();
-        return grooming.findByBookingDateBetweenOrderByBookingDateAscBookingTimeAsc(w[0],w[1])
-                .stream().map(this::groomingDto).collect(Collectors.toList());
+        User staff=currentReception(); return grooming.findByBookingDateBetweenOrderByBookingDateAscBookingTimeAsc(w[0],w[1])
+                .stream().filter(g->petAllowed(staff,g.getPet())).map(this::groomingDto).collect(Collectors.toList());
     }
 
     @GetMapping("/veterinarians/availability")
     public List<Map<String,Object>> veterinarianAvailabilitySummary() {
         LocalDate[] w = week();
 
-        return users.findByRole(Role.VETERINARIAN).stream().map(vet -> {
+        User staff=currentReception();
+        return users.findByRole(Role.VETERINARIAN).stream().filter(v->branchAllowed(staff.getBranch(),v.getBranch())).map(vet -> {
             Map<String,Object> m = vetDto(vet);
 
             List<Map<String,Object>> schedule = availability
@@ -212,8 +221,8 @@ public class ReceptionController {
     @GetMapping("/veterinarian-availability/week")
     public List<Map<String,Object>> weeklyAvailability() {
         LocalDate[] w=week();
-        return availability.findByAvailabilityDateBetweenOrderByAvailabilityDateAsc(w[0],w[1])
-                .stream().map(this::availabilityDto).collect(Collectors.toList());
+        User staff=currentReception(); return availability.findByAvailabilityDateBetweenOrderByAvailabilityDateAsc(w[0],w[1])
+                .stream().filter(a->branchAllowed(staff.getBranch(),a.getVeterinarian().getBranch())).map(this::availabilityDto).collect(Collectors.toList());
     }
 
     @PostMapping("/veterinarian-availability")
@@ -230,29 +239,36 @@ public class ReceptionController {
 
     @GetMapping("/stats")
     public Map<String,Object> stats() {
+        User staff=currentReception();
+        long petCount=pets.findAll().stream().filter(p->petAllowed(staff,p)).count();
+        long appointmentCount=appointments.findAll().stream().filter(a->branchAllowed(staff.getBranch(),a.getBranch())).count();
+        long vetCount=users.findByRole(Role.VETERINARIAN).stream().filter(v->branchAllowed(staff.getBranch(),v.getBranch())).count();
+        long groomingCount=grooming.findAll().stream().filter(g->petAllowed(staff,g.getPet())).count();
+        long reportCount=reports.findAll().stream().filter(r->branchAllowed(staff.getBranch(),r.getBranch())).count();
         Map<String,Object> x=new LinkedHashMap<>();
-        x.put("petOwners",users.findByRole(Role.PET_OWNER).size());
-        x.put("pets",pets.count());
-        x.put("appointments",appointments.count());
-        x.put("completedAppointments",appointments.countByStatus(AppointmentStatus.COMPLETED));
-        x.put("pendingAppointments",appointments.countByStatus(AppointmentStatus.PENDING));
-        x.put("veterinarians",users.findByRole(Role.VETERINARIAN).size());
-        x.put("groomingBookings",grooming.count());
-        x.put("medicalReports",reports.count());
+        x.put("petOwners",users.findByRole(Role.PET_OWNER).stream().filter(o->ownerAllowed(staff,o)).count());
+        x.put("pets",petCount);
+        x.put("appointments",appointmentCount);
+        x.put("completedAppointments",appointments.findAll().stream().filter(a->branchAllowed(staff.getBranch(),a.getBranch())&&a.getStatus()==AppointmentStatus.COMPLETED).count());
+        x.put("pendingAppointments",appointments.findAll().stream().filter(a->branchAllowed(staff.getBranch(),a.getBranch())&&a.getStatus()==AppointmentStatus.PENDING).count());
+        x.put("veterinarians",vetCount);
+        x.put("groomingBookings",groomingCount);
+        x.put("medicalReports",reportCount);
         return x;
     }
 
     @GetMapping("/operations/week")
     public List<Map<String,Object>> weeklyOperations() {
         LocalDate[] w=week();
-        return operations.findByOperationDateBetweenOrderByOperationDateAscOperationTimeAsc(w[0],w[1])
-                .stream().map(this::operationDto).collect(Collectors.toList());
+        User staff=currentReception(); return operations.findByOperationDateBetweenOrderByOperationDateAscOperationTimeAsc(w[0],w[1])
+                .stream().filter(o->petAllowed(staff,o.getPet())).map(this::operationDto).collect(Collectors.toList());
     }
 
     @PostMapping("/operations")
     public Map<String,Object> createOperation(@RequestBody Map<String,String> body) {
         Pet pet=pets.findById(Long.valueOf(required(body,"petId").replace("PET-","")))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pet not found."));
+        requirePetAccess(pet);
         Operation o=new Operation(); o.setPet(pet); o.setOwner(pet.getOwner());
         if(body.get("veterinarianId")!=null && !body.get("veterinarianId").trim().isEmpty()) o.setVeterinarian(resolveVet(body.get("veterinarianId")));
         o.setOperationType(required(body,"operationType")); o.setOperationDate(parseDate(required(body,"operationDate")));
@@ -262,23 +278,35 @@ public class ReceptionController {
 
     @GetMapping("/medical-records")
     public List<Map<String,Object>> medicalRecords() {
-        return reports.findAll().stream().map(this::reportDto).collect(Collectors.toList());
+        User staff=currentReception(); return reports.findAll().stream().filter(r->branchAllowed(staff.getBranch(),r.getBranch())).map(this::reportDto).collect(Collectors.toList());
     }
 
     @GetMapping("/owners/{id}")
     public Map<String,Object> owner(@PathVariable Long id) {
         User u=users.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Owner not found."));
+        if(!ownerAllowed(currentReception(),u)) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Owner belongs to another branch.");
         return ownerDto(u);
     }
 
+    private User currentReception(){
+        Authentication a=org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        User u=users.findByUsername(a.getName()).orElseThrow(()->new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Receptionist account not found."));
+        if(u.getRole()!=Role.RECEPTIONIST) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Receptionist access required.");
+        return u;
+    }
+    private boolean branchAllowed(Branch staff, Branch data){return staff==null||data==null||staff.getId().equals(data.getId());}
+    private boolean petAllowed(User staff, Pet p){return p!=null && (staff.getBranch()==null || p.getAssignedVeterinarian()==null || p.getAssignedVeterinarian().getBranch()==null || staff.getBranch().getId().equals(p.getAssignedVeterinarian().getBranch().getId()));}
+    private void requirePetAccess(Pet p){if(!petAllowed(currentReception(),p))throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Pet belongs to another branch.");}
+    private boolean ownerAllowed(User staff, User owner){if(staff.getBranch()==null)return true;List<Pet> ps=pets.findByOwner(owner);if(ps.isEmpty())return true;return ps.stream().anyMatch(p->petAllowed(staff,p));}
+
     private User resolveOwner(String id) {
         try { User u=users.findById(Long.valueOf(requiredValue(id))).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Owner not found."));
-            if(u.getRole()!=Role.PET_OWNER) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Selected user is not a pet owner."); return u;
+            if(u.getRole()!=Role.PET_OWNER) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Selected user is not a pet owner."); if(!ownerAllowed(currentReception(),u)) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Owner belongs to another branch."); return u;
         } catch(NumberFormatException e){throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid Owner ID.");}
     }
     private User resolveVet(String id) {
         try { User u=users.findById(Long.valueOf(requiredValue(id))).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Veterinarian not found."));
-            if(u.getRole()!=Role.VETERINARIAN) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Selected user is not a veterinarian."); return u;
+            if(u.getRole()!=Role.VETERINARIAN) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Selected user is not a veterinarian."); if(!branchAllowed(currentReception().getBranch(),u.getBranch())) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Veterinarian belongs to another branch."); return u;
         } catch(NumberFormatException e){throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid Veterinarian ID.");}
     }
     private String required(Map<String,String> b,String k){return requiredValue(b.get(k),k);}

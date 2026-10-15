@@ -6,7 +6,8 @@ import java.util.*;
 public class AdminController{
  private final AdminService service; public AdminController(AdminService s){service=s;}
  @GetMapping("/stats") public Map<String,Object> stats(){return service.stats();}
- @GetMapping("/users") public List<Map<String,Object>> users(@RequestParam(required=false)String q,@RequestParam(required=false)String role,@RequestParam(required=false)String status){return service.userList(q,role,status);}
+ @GetMapping("/users") public List<Map<String,Object>> users(@RequestParam(required=false)String q,@RequestParam(required=false)String role,@RequestParam(required=false)String status,@RequestParam(required=false)Long branchId){return service.userList(q,role,status,branchId);}
+ @GetMapping("/stakeholder-counts") public Map<String,Object> stakeholderCounts(){return service.stakeholderCounts();}
  @PostMapping("/users") public Map<String,Object> add(@RequestBody Map<String,Object>b,@RequestParam String actor){return service.saveUser(b,null,actor);}
  @PutMapping("/users/{id}") public Map<String,Object> edit(@PathVariable Long id,@RequestBody Map<String,Object>b,@RequestParam String actor){return service.saveUser(b,id,actor);}
  @PatchMapping("/users/{id}/status") public Map<String,Object> status(@PathVariable Long id,@RequestParam boolean active,@RequestParam String actor){return service.toggleUser(id,active,actor);}

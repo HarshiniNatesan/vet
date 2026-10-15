@@ -1,4 +1,4 @@
-document.write('<script src="/js/admin-page-common.js"><\/script>');
+
 async function loadStatistics(){
  try{
   const [s,r]=await Promise.all([api("/api/admin/stats"),api("/api/admin/records")]);

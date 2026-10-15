@@ -3,159 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Veterinary Hospital | Login</title>
-
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Sign in | PawsCare Veterinary Hospital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css"><link rel="icon" type="image/svg+xml" href="/images/dog-face.svg">
 </head>
+<body>
+<div class="auth-page">
 
-<body class="login-page">
-
-    <div class="login-background">
-
-        <div class="login-overlay"></div>
-
-        <div class="login-wrapper">
-
-            <div class="login-brand">
-                <div class="paw-logo">PawsCare</div>
-
-                <h1>Veterinary Hospital</h1>
-
-                <p>
-                    Caring for pets. Supporting owners.<br>
-                    Delivering better veterinary care.
-                </p>
-            </div>
-
-
-            <div class="login-card">
-
-                <div class="login-card-header">
-                    <h2>Welcome Back</h2>
-                    <p>Sign in to access your dashboard</p>
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="role">Login As</label>
-
-                    <select id="role">
-
-                        <option value="PET_OWNER">
-                            PawsCare Pet Owner
-                        </option>
-
-                        <option value="ADMIN">
-                            🛡️ Administrator
-                        </option>
-
-                        <option value="RECEPTIONIST">
-                            📋 Receptionist
-                        </option>
-
-                        <option value="VETERINARIAN">
-                            Save Medical Record Veterinarian
-                        </option>
-
-                        <option value="PHARMACY">
-                            💊 Pharmacy
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="username">Username</label>
-
-                    <input
-                        id="username"
-                        type="text"
-                        placeholder="Enter your username"
-                        autocomplete="username"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="password">Password</label>
-
-                    <div class="password-wrapper">
-
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            onclick="togglePassword()"
-                        >
-                            👁
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="login-button"
-                    onclick="login()"
-                >
-                    Login
-                </button>
-
-
-                <p id="msg" class="login-message"></p>
-
-
-                <div class="demo-box">
-
-                    <strong>Demo Accounts</strong>
-
-                    <div>Pet Owner: <b>owner1</b> / owner123</div>
-                    <div>Veterinarian: <b>doctor1</b> / doctor123</div>
-                    <div>Admin: <b>admin</b> / admin123</div>
-                    <div>Reception: <b>reception</b> / reception123</div>
-                    <div>Pharmacy: <b>pharmacy</b> / pharmacy123</div>
-
-                </div>
-
-            </div>
-
+    <section class="auth-aside">
+        <div class="auth-brand">
+            <div class="brand-mark" data-icon="paw"></div>
+            <span>PawsCare</span>
         </div>
+        <div class="auth-dog" aria-hidden="true">
+            <span class="paw p1"></span><span class="paw p2"></span><span class="paw p3"></span>
+            <div class="auth-dog-ring"><svg class="dog" viewBox="0 0 400 400" role="img" aria-label="A happy dog face"><g class="dog-collar"><path d="M104 296 Q200 352 296 296 L304 326 Q200 386 96 326Z" fill="#0b7a6e"/><circle cx="200" cy="362" r="19" fill="#ffd166" stroke="#e0a82e" stroke-width="3"/><path d="M200 369c-6-4-9-7-9-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-3 7-9 11z" fill="#0b7a6e"/></g>
+<g class="dog-ear dog-ear-l"><path d="M96 112C38 104 18 198 46 262c17 40 70 30 84-24 8-40 4-106-34-126z" fill="#a35d2c"/><path d="M92 140c-26 8-30 66-14 100 8 16 28 12 34-8" fill="#8a4a20" opacity=".55"/></g>
+<g class="dog-ear dog-ear-r"><path d="M304 112c58-8 78 86 50 150-17 40-70 30-84-24-8-40-4-106 34-126z" fill="#a35d2c"/><path d="M308 140c26 8 30 66 14 100-8 16-28 12-34-8" fill="#8a4a20" opacity=".55"/></g>
+<ellipse cx="200" cy="205" rx="122" ry="114" fill="#f2b863"/>
+<path d="M200 92c-24 26-30 70-16 112h32c14-42 8-86-16-112z" fill="#fff0d2"/>
+<ellipse cx="146" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(-18 146 160)"/><ellipse cx="254" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(18 254 160)"/>
+<ellipse cx="200" cy="264" rx="72" ry="54" fill="#fff0d2"/>
+<circle cx="116" cy="238" r="15" fill="#ff8f80" opacity=".4"/><circle cx="284" cy="238" r="15" fill="#ff8f80" opacity=".4"/>
+<g class="dog-eyes"><circle cx="150" cy="192" r="17" fill="#2a1912"/><circle cx="250" cy="192" r="17" fill="#2a1912"/><circle cx="156" cy="185" r="6" fill="#fff"/><circle cx="256" cy="185" r="6" fill="#fff"/><circle cx="144" cy="199" r="2.6" fill="#fff" opacity=".8"/><circle cx="244" cy="199" r="2.6" fill="#fff" opacity=".8"/></g>
+<g class="dog-tongue"><path d="M182 294c0 40 10 46 18 46s18-6 18-46c-12 8-24 8-36 0z" fill="#ff7f8c"/><path d="M200 300v28" stroke="#e45f6e" stroke-width="3" stroke-linecap="round"/></g>
+<path d="M200 262v24M200 286c-6 16-26 20-40 6M200 286c6 16 26 20 40 6" stroke="#2a1912" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M174 238c0-12 12-20 26-20s26 8 26 20c0 14-14 26-26 26s-26-12-26-26z" fill="#2a1912"/><ellipse cx="190" cy="233" rx="9" ry="4.5" fill="#fff" opacity=".35" transform="rotate(-12 190 233)"/>
+</svg></div>
+        </div>
+    </section>
 
-    </div>
+    <section class="auth-main">
+        <div class="auth-card">
+            <h2>Sign in</h2>
 
+            <div class="form-group">
+                <label for="role">Sign in as</label>
+                <select id="role">
+                    <option value="PET_OWNER">Pet Owner</option>
+                    <option value="ADMIN">Administrator</option>
+                    <option value="RECEPTIONIST">Receptionist</option>
+                    <option value="VETERINARIAN">Veterinarian</option>
+                    <option value="PHARMACY">Pharmacy</option>
+                </select>
+            </div>
 
-    <script src="/js/login.js"></script>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" placeholder="Enter your username" autocomplete="username">
+            </div>
 
-    <script>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Show or hide password" data-icon="eye"></button>
+                </div>
+            </div>
 
-        function togglePassword() {
+            <button type="button" class="login-button" onclick="login()">Login</button>
 
-            const password =
-                document.getElementById("password");
+            <p id="msg" class="login-message" role="alert"></p>
+        </div>
+    </section>
 
-            password.type =
-                password.type === "password"
-                    ? "text"
-                    : "password";
+</div>
 
-        }
-
-    </script>
-
+<script src="/js/login.js"></script>
+<script src="/js/shell.js" defer></script>
+<script>
+    function togglePassword() {
+        var p = document.getElementById("password");
+        p.type = p.type === "password" ? "text" : "password";
+    }
+</script>
 </body>
 </html>

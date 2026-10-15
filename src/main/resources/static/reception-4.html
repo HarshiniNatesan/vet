@@ -5,15 +5,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Receptionist Dashboard</title>
-<link href="/css/style.css" rel="stylesheet"/>
-<link href="/css/role-premium.css" rel="stylesheet"/>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css"></head>
 <body class="focused" data-show="4">
-<header>
-<h2>Receptionist Dashboard</h2>
-<nav class="role-nav"><a href="/reception.html">Dashboard</a><a href="/reception-1.html">Register</a><a href="/reception-2.html">Availability</a><a href="/reception-3.html">Pets</a><a class="active" href="/reception-4.html">Owners</a><a href="/reception-5.html">Vet Appointments</a><a href="/reception-6.html">Grooming</a><a href="/reception-7.html">Operations</a><a href="/reception-8.html">Records</a><a href="/reception-statistics.html">Statistics</a></nav><button onclick="logout()">Logout</button>
-</header><div class="page-banner"><div class="inner"><h1>Owners</h1><p>Manage and review owners from a dedicated workspace.</p></div></div>
-<main>
+<div class="role-shell"><aside class="role-sidebar"><div class="role-brand">PawsCare</div><div class="role-sub">RECEPTIONIST WORKSPACE</div><nav class="role-nav"><a href="/reception.html">Dashboard</a><a href="/reception-1.html">Register Pet &amp; Owner</a><a href="/reception-2.html">Veterinarian Availability</a><a href="/reception-3.html">Pet Management</a><a class="active" href="/reception-4.html">Owner Management</a><a href="/reception-5.html">Appointments</a><a href="/reception-6.html">Grooming Appointments</a><a href="/reception-7.html">Operations</a><a href="/reception-8.html">Records</a><a href="/reception-statistics.html">Statistics</a></nav><button class="role-logout" onclick="logout()">Sign out</button></aside><main class="role-main"><header class="role-top"><div><h1>Owners</h1></div></header>
 <div class="grid">
 <section class="card wide" style="display:none!important">
 <h3>Receptionist Profile</h3>
@@ -102,7 +96,7 @@
 <p id="operationMsg"></p>
 </section>
 </div>
-</main>
+</main></div>
 <script src="/js/reception.js"></script>
-</body>
+<script src="/js/shell.js" defer></script></body>
 </html>

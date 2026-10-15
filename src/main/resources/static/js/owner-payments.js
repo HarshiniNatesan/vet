@@ -1,0 +1,12 @@
+const user=localStorage.getItem('username'), role=localStorage.getItem('role');
+if(!user||role!=='PET_OWNER') location='/login.html';
+async function api(url,opt={}){const r=await fetch(url,{credentials:'same-origin',...opt});const t=await r.text();let d={};try{d=t?JSON.parse(t):{};}catch{d={message:t}}if(!r.ok)throw new Error(d.message||'Request failed');return d;}
+const esc=v=>String(v??'-').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+const money=v=>'₹'+Number(v||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+async function load(){try{const rows=await api(`/api/payments/owner/${encodeURIComponent(user)}`);let paid=0,pending=0,consultation=0,medicine=0;rows.forEach(p=>{const a=Number(p.amount||0);if(p.paymentType==='DOCTOR_CONSULTATION')consultation+=a;if(p.paymentType==='PHARMACY')medicine+=a;if(['SUCCESS','PAID','CONFIRMED'].includes(p.status))paid+=a;else if(['PENDING','USER_REPORTED','REPORTED','PROCESSING'].includes(p.status))pending+=a;});document.getElementById('totalSpent').textContent=money(paid);document.getElementById('pendingTotal').textContent=money(pending);document.getElementById('consultationTotal').textContent=money(consultation);document.getElementById('medicineTotal').textContent=money(medicine);document.getElementById('payments').innerHTML=rows.map(p=>`<div class="item"><b>${esc(p.paymentType==='DOCTOR_CONSULTATION'?'Consultation bill':p.paymentType==='PHARMACY'?'Medicine bill':p.paymentType)}</b> — ${money(p.amount)} — <b>${esc(['CONFIRMED','SUCCESS','PAID'].includes(String(p.status).toUpperCase())?'PAID':p.status)}</b><br>Bill #${esc(p.id)} · Pet: ${esc(p.petName)} · Owner: ${esc(p.ownerName)}<br>Doctor: ${esc(p.veterinarian)} · Branch: ${esc(p.branch)}<br><small>Paid at: ${esc(p.paidAt?PaymentUI.fmtDateTime(p.paidAt):'Not yet paid')}</small></div>`).join('')||'<p>No recorded bills yet.</p>';}catch(e){document.getElementById('payments').textContent=e.message;['totalSpent','pendingTotal','consultationTotal','medicineTotal'].forEach(id=>document.getElementById(id).textContent='Unavailable');}}
+load();
+
+// Keep the owner's expense summary fresh when hospital staff updates a bill in another tab.
+window.addEventListener('storage',e=>{if(e.key==='pawsCarePaymentUpdated')load();});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});
+window.setInterval(()=>{if(!document.hidden)load();},5000);

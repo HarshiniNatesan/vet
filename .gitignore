@@ -1,2 +1,11 @@
-﻿target/
+target/
 *.class
+*.log
+.idea/
+.vscode/
+*.iml
+.env
+.env.*
+application-local.properties
+# Never commit local credentials or payment secrets
+**/secrets.properties

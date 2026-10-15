@@ -137,6 +137,7 @@ public class OwnerController {
         a.setOwner(o);
         a.setPet(p);
         a.setVeterinarian(v);
+        a.setBranch(v.getBranch());
         a.setAppointmentDate(appointmentDate);
         a.setAppointmentTime(appointmentTime);
         a.setReason(b.get("reason"));

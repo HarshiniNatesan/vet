@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Friendly dog face"><rect width="400" height="400" rx="88" fill="#d6efea"/><g transform="translate(40 36) scale(.8)"><g ><path d="M104 296 Q200 352 296 296 L304 326 Q200 386 96 326Z" fill="#0b7a6e"/><circle cx="200" cy="362" r="19" fill="#ffd166" stroke="#e0a82e" stroke-width="3"/><path d="M200 369c-6-4-9-7-9-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-3 7-9 11z" fill="#0b7a6e"/></g>
+<g ><path d="M96 112C38 104 18 198 46 262c17 40 70 30 84-24 8-40 4-106-34-126z" fill="#a35d2c"/><path d="M92 140c-26 8-30 66-14 100 8 16 28 12 34-8" fill="#8a4a20" opacity=".55"/></g>
+<g ><path d="M304 112c58-8 78 86 50 150-17 40-70 30-84-24-8-40-4-106 34-126z" fill="#a35d2c"/><path d="M308 140c26 8 30 66 14 100-8 16-28 12-34-8" fill="#8a4a20" opacity=".55"/></g>
+<ellipse cx="200" cy="205" rx="122" ry="114" fill="#f2b863"/>
+<path d="M200 92c-24 26-30 70-16 112h32c14-42 8-86-16-112z" fill="#fff0d2"/>
+<ellipse cx="146" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(-18 146 160)"/><ellipse cx="254" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(18 254 160)"/>
+<ellipse cx="200" cy="264" rx="72" ry="54" fill="#fff0d2"/>
+<circle cx="116" cy="238" r="15" fill="#ff8f80" opacity=".4"/><circle cx="284" cy="238" r="15" fill="#ff8f80" opacity=".4"/>
+<g ><circle cx="150" cy="192" r="17" fill="#2a1912"/><circle cx="250" cy="192" r="17" fill="#2a1912"/><circle cx="156" cy="185" r="6" fill="#fff"/><circle cx="256" cy="185" r="6" fill="#fff"/><circle cx="144" cy="199" r="2.6" fill="#fff" opacity=".8"/><circle cx="244" cy="199" r="2.6" fill="#fff" opacity=".8"/></g>
+<g ><path d="M182 294c0 40 10 46 18 46s18-6 18-46c-12 8-24 8-36 0z" fill="#ff7f8c"/><path d="M200 300v28" stroke="#e45f6e" stroke-width="3" stroke-linecap="round"/></g>
+<path d="M200 262v24M200 286c-6 16-26 20-40 6M200 286c6 16 26 20 40 6" stroke="#2a1912" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M174 238c0-12 12-20 26-20s26 8 26 20c0 14-14 26-26 26s-26-12-26-26z" fill="#2a1912"/><ellipse cx="190" cy="233" rx="9" ry="4.5" fill="#fff" opacity=".35" transform="rotate(-12 190 233)"/>
+</g></svg>

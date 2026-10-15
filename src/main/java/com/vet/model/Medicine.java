@@ -21,6 +21,7 @@ public class Medicine {
     @Column(name="unit_price", nullable=false) private Double unitPrice=0.0;
     @Column(nullable=false) private Boolean active=true;
     @Column(name="last_updated") private LocalDate lastUpdated;
+    @ManyToOne @JoinColumn(name="branch_id") private Branch branch;
 
     @PrePersist @PreUpdate public void touch(){ lastUpdated=LocalDate.now(); }
 
@@ -42,4 +43,5 @@ public class Medicine {
     public Double getUnitPrice(){return unitPrice;} public void setUnitPrice(Double v){unitPrice=v;}
     public Boolean getActive(){return active;} public void setActive(Boolean v){active=v;}
     public LocalDate getLastUpdated(){return lastUpdated;} public void setLastUpdated(LocalDate v){lastUpdated=v;}
+    public Branch getBranch(){return branch;} public void setBranch(Branch v){branch=v;}
 }

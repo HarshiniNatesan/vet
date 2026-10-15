@@ -18,6 +18,8 @@ public class Appointment {
     @Enumerated(EnumType.STRING) private AppointmentPriority priority;
     @Enumerated(EnumType.STRING) private AppointmentStatus status;
 
+    @ManyToOne @JoinColumn(name="branch_id") private Branch branch;
+
     public Appointment(){}
     public Long getId(){return id;} public void setId(Long v){id=v;}
     public Pet getPet(){return pet;} public void setPet(Pet v){pet=v;}
@@ -28,4 +30,5 @@ public class Appointment {
     public String getReason(){return reason;} public void setReason(String v){reason=v;}
     public AppointmentPriority getPriority(){return priority;} public void setPriority(AppointmentPriority v){priority=v;}
     public AppointmentStatus getStatus(){return status;} public void setStatus(AppointmentStatus v){status=v;}
+    public Branch getBranch(){return branch;} public void setBranch(Branch v){branch=v;}
 }

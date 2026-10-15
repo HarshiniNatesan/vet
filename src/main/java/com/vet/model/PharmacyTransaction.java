@@ -20,6 +20,7 @@ public class PharmacyTransaction {
     @Column(name="total_amount", nullable=false) private Double totalAmount;
     @Column(name="dispensing_date", nullable=false) private LocalDateTime dispensingDate;
     @Column(name="dispensing_status", nullable=false) private String dispensingStatus;
+    @ManyToOne @JoinColumn(name="branch_id") private Branch branch;
 
     public Long getId(){return id;} public Prescription getPrescription(){return prescription;} public void setPrescription(Prescription v){prescription=v;}
     public void setId(Long v){id=v;} public Pet getPet(){return pet;} public void setPet(Pet v){pet=v;}
@@ -31,4 +32,5 @@ public class PharmacyTransaction {
     public Double getTotalAmount(){return totalAmount;} public void setTotalAmount(Double v){totalAmount=v;}
     public LocalDateTime getDispensingDate(){return dispensingDate;} public void setDispensingDate(LocalDateTime v){dispensingDate=v;}
     public String getDispensingStatus(){return dispensingStatus;} public void setDispensingStatus(String v){dispensingStatus=v;}
+    public Branch getBranch(){return branch;} public void setBranch(Branch v){branch=v;}
 }

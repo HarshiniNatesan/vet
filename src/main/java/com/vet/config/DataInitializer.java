@@ -4,9 +4,11 @@ import com.vet.model.Pet;
 import com.vet.model.Medicine;
 import com.vet.model.Role;
 import com.vet.model.User;
+import com.vet.model.Branch;
 import com.vet.repository.PetRepository;
 import com.vet.repository.MedicineRepository;
 import com.vet.repository.UserRepository;
+import com.vet.repository.BranchRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ public class DataInitializer {
     CommandLineRunner init(UserRepository users,
                            PetRepository pets,
                            MedicineRepository medicines,
+                           BranchRepository branches,
                            PasswordEncoder encoder) {
         return args -> {
             User owner = ensureDemoUser(users, encoder, "owner1", "owner123", Role.PET_OWNER,
@@ -31,6 +34,12 @@ public class DataInitializer {
                     "Reception Staff", "reception@example.com", "9000000002");
             User pharmacy = ensureDemoUser(users, encoder, "pharmacy", "pharmacy123", Role.PHARMACY,
                     "Pharmacy Staff", "pharmacy@example.com", "9000000003");
+
+            Branch tambaram = ensureBranch(branches, "TAMBARAM", "Tambaram Branch", "Tambaram, Chennai");
+            ensureBranch(branches, "ECR", "ECR Branch", "ECR, Chennai");
+            vet.setBranch(tambaram); vet.setConsultationFee(new java.math.BigDecimal("500.00"));
+            reception.setBranch(tambaram); pharmacy.setBranch(tambaram);
+            users.save(vet); users.save(reception); users.save(pharmacy);
 
             vet.setSpecialization("Small Animal Medicine");
             vet.setQualification("BVSc & AH");
@@ -82,6 +91,12 @@ public class DataInitializer {
             addMedicine(medicines, "Prednisolone", "Corticosteroid", "VetPharm", "PRE-2026-05", "2027-08-31", 45, 15, 55.00, "Veterinary corticosteroid.");
             addMedicine(medicines, "Ondansetron", "Antiemetic", "AnimalCare", "OND-2026-06", "2027-07-31", 60, 15, 40.00, "Antiemetic medicine.");
         };
+    }
+
+    private Branch ensureBranch(BranchRepository branches, String code, String name, String address) {
+        return branches.findByBranchCodeIgnoreCase(code).orElseGet(() -> {
+            Branch b=new Branch(); b.setBranchCode(code); b.setBranchName(name); b.setAddress(address); b.setActive(true); return branches.save(b);
+        });
     }
 
     private void addMedicine(MedicineRepository medicines, String name, String category, String manufacturer,

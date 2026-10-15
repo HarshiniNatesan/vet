@@ -4,16 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veterinarian Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/role-premium.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"><link rel="stylesheet" href="/css/theme.css"></head>
 <body class="focused" data-show="7">
-<header>
-    <h2>Veterinarian Dashboard</h2>
-    <nav class="role-nav"><a href="/vet.html">Dashboard</a><a href="/vet-1.html">Appointments</a><a href="/vet-2.html">Patients</a><a href="/vet-3.html">Medical Records</a><a href="/vet-4.html">Prescriptions</a><a href="/vet-5.html">Vaccinations</a><a href="/vet-6.html">Availability</a><a href="/vet-7.html" class="active">Profile</a></nav><button onclick="logout()">Logout</button>
-</header><div class="page-banner"><div class="inner"><h1>Profile</h1><p>Manage and review profile from a dedicated workspace.</p></div></div>
-
-<main>
+<div class="role-shell"><aside class="role-sidebar"><div class="role-brand">PawsCare</div><div class="role-sub">VETERINARIAN WORKSPACE</div><nav class="role-nav"><a href="/vet.html">Dashboard</a><a href="/vet-1.html">Appointments</a><a href="/vet-2.html">Patients</a><a href="/vet-3.html">Medical Records</a><a href="/vet-4.html">Prescriptions</a><a href="/vet-5.html">Vaccinations</a><a href="/vet-6.html">Availability</a><a class="active" href="/vet-7.html">Profile</a><a href="/vet-statistics.html">Statistics</a></nav><button class="role-logout" onclick="logout()">Sign out</button></aside><main class="role-main"><header class="role-top"><div><h1>Profile</h1></div></header>
     <div class="grid">
 
         <section class="card wide">
@@ -100,7 +93,7 @@
                       placeholder="Notes"></textarea>
 
             <button onclick="saveMedicalRecord()">
-                Save Medical Record Save Medical Record
+                Save Medical Record
             </button>
 
             <button onclick="clearMedicalForm()">
@@ -148,7 +141,7 @@
                       placeholder="Vaccination notes"></textarea>
 
             <button onclick="saveVaccination()">
-                💉 Save Vaccination
+                Save Vaccination
             </button>
 
             <button onclick="clearVaccinationForm()">
@@ -185,15 +178,15 @@
                       placeholder="Instructions"></textarea>
 
             <button onclick="prescribe()">
-                💊 Save Prescription
+                Save Prescription
             </button>
         </section>
 
         
 
     </div>
-</main>
+</main></div>
 
-<script src="/js/vet.js"></script>
-</body>
+<script src="/js/payment-common.js"></script><script src="/js/vet.js"></script>
+<script src="/js/shell.js" defer></script></body>
 </html>

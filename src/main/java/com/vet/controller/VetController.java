@@ -37,6 +37,9 @@ public class VetController {
     }
 
     private User vet(String username) {
+        org.springframework.security.core.Authentication current = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if(current==null || !current.isAuthenticated() || !current.getName().equals(username))
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"You can access only your own veterinarian account.");
         return users.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,"Veterinarian not found"));
@@ -155,7 +158,14 @@ public class VetController {
 
     @GetMapping("/all-priority-appointments")
     public List<Appointment> all() {
-        return appointments.findAllPrioritySorted();
+        String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        User doctor = vet(username);
+        List<Appointment> result = new ArrayList<>();
+        for(Appointment a: appointments.findAllPrioritySorted()) {
+            if(a.getVeterinarian()!=null && a.getVeterinarian().getId().equals(doctor.getId())) result.add(a);
+            else if(doctor.getBranch()!=null && a.getBranch()!=null && doctor.getBranch().getId().equals(a.getBranch().getId())) result.add(a);
+        }
+        return result;
     }
 
     @PutMapping("/appointments/{id}/status")
@@ -165,6 +175,11 @@ public class VetController {
         Appointment appointment=appointments.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,"Appointment not found"));
+        String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        User doctor = vet(username);
+        boolean allowed = appointment.getVeterinarian()!=null && appointment.getVeterinarian().getId().equals(doctor.getId());
+        if(!allowed && doctor.getBranch()!=null && appointment.getBranch()!=null) allowed = doctor.getBranch().getId().equals(appointment.getBranch().getId());
+        if(!allowed) throw new ResponseStatusException(HttpStatus.FORBIDDEN,"You cannot modify an appointment outside your access scope.");
 
         String newStatus=body.get("status");
 
@@ -180,9 +195,8 @@ public class VetController {
 
     @GetMapping("/pets/{id}")
     public Pet pet(@PathVariable Long id) {
-        return pets.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,"Pet not found"));
+        String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        return assignedPet(vet(username), id);
     }
 
     @GetMapping("/reports/{username}")
@@ -208,6 +222,7 @@ public class VetController {
 
         MedicalReport report=new MedicalReport();
         report.setVeterinarian(doctor);
+        report.setBranch(doctor.getBranch());
         report.setPet(pet);
         report.setVisitDate(parseDateOrToday(body.get("visitDate")));
         report.setSymptoms(body.get("symptoms"));
@@ -344,6 +359,7 @@ public class VetController {
 
         Prescription p=new Prescription();
         p.setVeterinarian(doctor);
+        p.setBranch(doctor.getBranch());
         p.setPet(pet);
         p.setMedicineName(required(body,"medicineName"));
         p.setDosage(body.get("dosage"));

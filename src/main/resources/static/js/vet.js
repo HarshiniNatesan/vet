@@ -63,6 +63,7 @@ async function loadAppointments() {
     try {
         const appointments =
             await api(`/api/vet/appointments/${encodeURIComponent(user)}`);
+        window.currentVetAppointments = appointments;
 
         const container =
             document.getElementById("appointments");
@@ -118,6 +119,7 @@ async function loadAppointments() {
                 )">
                     Open Patient
                 </button>
+                <button onclick="createConsultationBill(${a.id})">Payment / Consultation Bill</button>
 
                 <button onclick="updateStatus(
                     ${a.id}, 'CONFIRMED'
@@ -654,3 +656,24 @@ function logout() {
 loadVetProfile();
 loadAppointments();
 loadPatients();
+
+async function createConsultationBill(appointmentId){
+ const host=document.getElementById("appointments");
+ let panel=document.getElementById(`consultation-bill-${appointmentId}`);
+ if(panel){panel.hidden=!panel.hidden;return;}
+ panel=document.createElement('div');panel.id=`consultation-bill-${appointmentId}`;panel.className='item';
+ panel.innerHTML=`<h4>Consultation Bill</h4><label for="consult-fee-${appointmentId}">Consultation fee (₹)</label><input id="consult-fee-${appointmentId}" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="Enter consultation fee"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px"><button type="button" id="create-consult-${appointmentId}">Create / Update Bill</button><span id="consult-error-${appointmentId}" class="error" role="status" aria-live="polite"></span></div><div id="consult-invoice-${appointmentId}" style="margin-top:12px"></div>`;
+ host.appendChild(panel);
+ const fee=document.getElementById(`consult-fee-${appointmentId}`), error=document.getElementById(`consult-error-${appointmentId}`), invoice=document.getElementById(`consult-invoice-${appointmentId}`), create=document.getElementById(`create-consult-${appointmentId}`);
+ create.onclick=async()=>{
+  const amount=Number(fee.value);error.textContent='';
+  if(!Number.isFinite(amount)||amount<=0){error.textContent='Enter a valid consultation fee greater than zero.';return;}
+  create.disabled=true;
+  try{
+   const bill=await api('/api/payments/staff/consultation/'+appointmentId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount})});
+   fee.disabled=true;create.hidden=true;
+   PaymentUI.mount(invoice,bill,api);
+   window.dispatchEvent(new CustomEvent('payment-status-updated',{detail:{billId:bill.id,status:bill.status,amount:bill.amount}}));try{localStorage.setItem('pawsCarePaymentUpdated',JSON.stringify({billId:bill.id,status:bill.status,at:Date.now()}));}catch(_){}
+  }catch(e){error.textContent=e.message||'Unable to create consultation bill.';create.disabled=false;}
+ };
+}

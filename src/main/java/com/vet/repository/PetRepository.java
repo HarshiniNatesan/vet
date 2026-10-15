@@ -9,4 +9,5 @@ public interface PetRepository extends JpaRepository<Pet,Long> {
     List<Pet> findByOwner(User owner);
     List<Pet> findByAssignedVeterinarian(User veterinarian);
     List<Pet> findByNameContainingIgnoreCase(String name);
+    Optional<Pet> findByReportTokenHash(String reportTokenHash);
 }

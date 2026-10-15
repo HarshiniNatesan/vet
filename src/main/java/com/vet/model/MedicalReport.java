@@ -21,6 +21,7 @@ public class MedicalReport {
     @Lob private String surgeryDetails;
     @Lob private String notes;
     private boolean completed;
+    @ManyToOne @JoinColumn(name="branch_id") private Branch branch;
 
     public MedicalReport(){}
     public Long getId(){return id;} public void setId(Long v){id=v;}
@@ -37,4 +38,5 @@ public class MedicalReport {
     public String getSurgeryDetails(){return surgeryDetails;} public void setSurgeryDetails(String v){surgeryDetails=v;}
     public String getNotes(){return notes;} public void setNotes(String v){notes=v;}
     public boolean isCompleted(){return completed;} public void setCompleted(boolean v){completed=v;}
+    public Branch getBranch(){return branch;} public void setBranch(Branch v){branch=v;}
 }

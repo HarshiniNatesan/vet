@@ -1,47 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Veterinary Hospital Management System</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawsCare Veterinary Hospital | Care that makes tails wag</title>
+<meta name="description" content="PawsCare Veterinary Hospital: wellness check-ups, vaccinations, pharmacy and grooming, with your pet's records online.">
+<link rel="icon" type="image/svg+xml" href="/images/dog-face.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap">
+<style>
+:root{--ink:#10302c;--muted:#5d726c;--teal:#0b7a6e;--teal-d:#0a3d3a;--cream:#fff6e6;--sun:#ffc857;--coral:#ff7a59;--mint:#d6efea;--line:#eadfca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}main{overflow-x:clip;padding-bottom:0}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit}h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.08;margin:0}
+.wrap{max-width:1160px;margin:auto;padding:0 24px}
+.ico{width:24px;height:24px}
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;text-decoration:none}
+.brand img{width:46px;height:46px;border-radius:14px;box-shadow:0 6px 16px #0b7a6e33}
+.brand small{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.links{display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}.links a{text-decoration:none;color:var(--muted)}.links a:hover{color:var(--teal)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:13px 26px;font-weight:700;text-decoration:none;background:var(--coral);color:#fff;box-shadow:0 10px 24px #ff7a5940;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px #ff7a5950}
+.btn.dark{background:var(--teal-d);box-shadow:0 10px 24px #0a3d3a40}.links .btn{color:#fff;padding:10px 22px}
+.btn.ghost{background:transparent;color:var(--teal-d);box-shadow:inset 0 0 0 2px var(--teal-d)}
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:34px 0 70px}
+.tag{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:700;font-size:13px;color:var(--teal)}
+.tag:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px #ff7a5933}
+h1{font-size:clamp(46px,6.4vw,84px);font-weight:800;letter-spacing:-.035em;margin:22px 0 20px}
+h1 .u{position:relative;white-space:nowrap;color:var(--teal)}h1 .u:after{content:"";position:absolute;left:-2%;right:-2%;bottom:.04em;height:.2em;background:var(--sun);z-index:-1;border-radius:99px;transform:rotate(-1.5deg)}
+.lead{font-size:19px;color:var(--muted);max-width:520px;margin:0 0 30px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}.chips span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.stage{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin-left:auto;display:grid;place-items:center}
+.blob{position:absolute;inset:4%;background:linear-gradient(150deg,var(--mint),#b9e4dc);border-radius:46% 54% 50% 50%/55% 45% 55% 45%;animation:morph 9s ease-in-out infinite}
+.stage .sun{position:absolute;width:26%;aspect-ratio:1;border-radius:50%;background:var(--sun);right:2%;top:2%;box-shadow:0 0 0 14px #ffc85740}
+.stage .dog{position:relative;width:82%;height:auto;filter:drop-shadow(0 22px 26px #0a3d3a40);overflow:visible;animation:bob 5s ease-in-out infinite}
+.float{position:absolute;background:#fff;border-radius:18px;padding:12px 16px 12px 12px;box-shadow:0 16px 36px #0a3d3a24;display:flex;gap:12px;align-items:center;font-size:13px;line-height:1.3;animation:bob 6s ease-in-out infinite}
+.float b{display:block;font-size:14px}.float span.i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--mint);color:var(--teal)}
+.f1{left:-2%;top:18%}.f2{right:-3%;bottom:20%;animation-delay:-2s}.f2 span.i{background:#ffe4dc;color:var(--coral)}
+.badge{position:absolute;left:4%;bottom:2%;width:112px;height:112px;border-radius:50%;background:var(--teal-d);color:var(--sun);display:grid;place-items:center;text-align:center;font-family:'Fraunces',serif;font-weight:800;font-size:15px;line-height:1.1;transform:rotate(-10deg);box-shadow:0 12px 24px #0a3d3a40;border:3px dashed #ffc85780;outline:6px solid var(--cream);outline-offset:-1px}
+.call{display:inline-flex;align-items:center;gap:8px;color:var(--teal-d)!important;font-weight:700}.call .ico,.btn .ico{width:18px;height:18px}.btn.ghost{gap:10px}.band-btns{display:flex;gap:12px;flex-wrap:wrap}.band .btn.call-btn{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff}
+/* ticker */
+.ticker{background:var(--teal-d);color:#fff;transform:rotate(-1.2deg);margin:0 -2vw;padding:16px 0;overflow:hidden;white-space:nowrap}
+.track{display:inline-flex;gap:26px;animation:slide 32s linear infinite;font-family:'Fraunces',serif;font-weight:600;font-size:22px}.track i{color:var(--sun);font-style:normal}
+/* sections */
+section.wrap{padding-top:92px}.eyebrow{font-weight:800;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral)}
+h2{font-size:clamp(34px,4.4vw,54px);font-weight:800;letter-spacing:-.03em;margin:10px 0 14px;max-width:640px}.sub{color:var(--muted);font-size:17px;max-width:560px;margin:0 0 40px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;transition:transform .25s,box-shadow .25s,background .25s}
+.svc:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 22px 40px #0a3d3a1c}.svc:nth-child(3n+2):hover{transform:translateY(-6px) rotate(.6deg)}
+.svc-ico{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:var(--mint);color:var(--teal);margin-bottom:18px}
+.svc:nth-child(2) .svc-ico,.svc:nth-child(5) .svc-ico{background:#ffe4dc;color:var(--coral)}.svc:nth-child(3) .svc-ico,.svc:nth-child(6) .svc-ico{background:#fff0c4;color:#b77c00}
+.svc h3{font-size:23px;margin-bottom:8px}.svc p{margin:0;color:var(--muted);font-size:15px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+.steps li{position:relative;background:var(--teal-d);color:#e7f4f1;border-radius:28px;padding:34px 28px 30px;overflow:hidden}
+.steps .n{position:absolute;right:20px;top:2px;font-family:'Fraunces',serif;font-weight:800;font-size:96px;color:#ffffff12;line-height:1}
+.step-ico{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--sun);color:var(--teal-d);margin-bottom:20px}
+.steps h3{color:#fff;font-size:24px;margin-bottom:8px}.steps p{margin:0;color:#b7d3cd;font-size:15px}
+/* cta band */
+.band{position:relative;margin-top:96px;background:linear-gradient(120deg,var(--coral),#ff9a5c);border-radius:40px;color:#fff;padding:56px 56px;display:grid;grid-template-columns:1fr 220px;gap:20px;align-items:center;overflow:hidden}
+.band h2{color:#fff;max-width:520px;margin:0 0 12px}.band p{margin:0 0 26px;color:#fff3ec;font-size:17px;max-width:480px}.band .btn{background:#fff;color:var(--coral);box-shadow:0 12px 26px #0000002a}
+.band .dog{width:220px;height:auto;justify-self:end;filter:drop-shadow(0 14px 18px #00000030);overflow:visible;animation:bob 5s ease-in-out infinite}
+.band:before{content:"";position:absolute;right:-60px;top:-80px;width:300px;height:300px;border-radius:50%;background:#ffffff1f}
+footer.wrap{padding:56px 24px 40px}footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}footer a{font-weight:700;color:var(--teal);text-decoration:none}
+/* dog animation hooks */
+.dog-ear{transform-box:fill-box;animation:ear 3.4s ease-in-out infinite}.dog-ear-l{transform-origin:85% 10%}.dog-ear-r{transform-origin:15% 10%;animation-delay:.15s}
+.dog-eyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}.dog-tongue{transform-box:fill-box;transform-origin:50% 0;animation:tongue 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}@keyframes morph{50%{border-radius:54% 46% 44% 56%/46% 56% 44% 54%}}
+@keyframes slide{to{transform:translateX(-50%)}}@keyframes ear{0%,80%,100%{transform:rotate(0)}88%{transform:rotate(6deg)}94%{transform:rotate(-3deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}@keyframes tongue{50%{transform:scaleY(1.1)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){.links a:not(.btn):not(.call){display:none}.hero{grid-template-columns:1fr;padding-bottom:50px}.stage{margin:0 auto;max-width:420px}.grid,.steps{grid-template-columns:1fr 1fr}.band{grid-template-columns:1fr;padding:40px 30px}.band .dog{display:none}}
+@media(max-width:600px){.call{font-size:0;gap:0}.call .ico{width:22px;height:22px}.grid,.steps{grid-template-columns:1fr}section.wrap{padding-top:70px}.f1{left:0}.f2{right:0}.badge{width:92px;height:92px;font-size:12.5px}.brand small{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
-
-
 <body>
+<header class="wrap"><nav>
+<a class="brand" href="/"><img src="/images/dog-face.svg" alt=""><span>PawsCare<small>Veterinary Hospital</small></span></a>
+<div class="links"><a href="#services">Services</a><a href="#how">How it works</a><a class="call" href="tel:90099990999"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>90099990999</a><a class="btn dark" href="/login.html">Portal login</a></div>
+</nav></header>
 
-    <div class="center">
+<main>
+<div class="wrap hero">
+<div>
+<span class="tag">Care that makes tails wag</span>
+<h1>Happy pets. <span class="u">Healthy</span> families.</h1>
+<p class="lead">From first vaccines to golden-years check-ups, PawsCare gives your companion gentle, expert care, with every record just a tap away.</p>
+<div class="cta"><a class="btn" href="/login.html">Book a visit →</a><a class="btn ghost" href="tel:90099990999"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call 90099990999</a></div>
+<div class="chips"><span>Check-ups</span><span>Vaccinations</span><span>Pharmacy</span><span>Grooming</span></div>
+</div>
+<div class="stage" role="img" aria-label="A happy dog">
+<div class="blob"></div><div class="sun"></div>
+<svg class="dog" viewBox="0 0 400 400" role="img" aria-label="A happy dog face"><g class="dog-collar"><path d="M104 296 Q200 352 296 296 L304 326 Q200 386 96 326Z" fill="#0b7a6e"/><circle cx="200" cy="362" r="19" fill="#ffd166" stroke="#e0a82e" stroke-width="3"/><path d="M200 369c-6-4-9-7-9-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-3 7-9 11z" fill="#0b7a6e"/></g>
+<g class="dog-ear dog-ear-l"><path d="M96 112C38 104 18 198 46 262c17 40 70 30 84-24 8-40 4-106-34-126z" fill="#a35d2c"/><path d="M92 140c-26 8-30 66-14 100 8 16 28 12 34-8" fill="#8a4a20" opacity=".55"/></g>
+<g class="dog-ear dog-ear-r"><path d="M304 112c58-8 78 86 50 150-17 40-70 30-84-24-8-40-4-106 34-126z" fill="#a35d2c"/><path d="M308 140c26 8 30 66 14 100-8 16-28 12-34-8" fill="#8a4a20" opacity=".55"/></g>
+<ellipse cx="200" cy="205" rx="122" ry="114" fill="#f2b863"/>
+<path d="M200 92c-24 26-30 70-16 112h32c14-42 8-86-16-112z" fill="#fff0d2"/>
+<ellipse cx="146" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(-18 146 160)"/><ellipse cx="254" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(18 254 160)"/>
+<ellipse cx="200" cy="264" rx="72" ry="54" fill="#fff0d2"/>
+<circle cx="116" cy="238" r="15" fill="#ff8f80" opacity=".4"/><circle cx="284" cy="238" r="15" fill="#ff8f80" opacity=".4"/>
+<g class="dog-eyes"><circle cx="150" cy="192" r="17" fill="#2a1912"/><circle cx="250" cy="192" r="17" fill="#2a1912"/><circle cx="156" cy="185" r="6" fill="#fff"/><circle cx="256" cy="185" r="6" fill="#fff"/><circle cx="144" cy="199" r="2.6" fill="#fff" opacity=".8"/><circle cx="244" cy="199" r="2.6" fill="#fff" opacity=".8"/></g>
+<g class="dog-tongue"><path d="M182 294c0 40 10 46 18 46s18-6 18-46c-12 8-24 8-36 0z" fill="#ff7f8c"/><path d="M200 300v28" stroke="#e45f6e" stroke-width="3" stroke-linecap="round"/></g>
+<path d="M200 262v24M200 286c-6 16-26 20-40 6M200 286c6 16 26 20 40 6" stroke="#2a1912" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M174 238c0-12 12-20 26-20s26 8 26 20c0 14-14 26-26 26s-26-12-26-26z" fill="#2a1912"/><ellipse cx="190" cy="233" rx="9" ry="4.5" fill="#fff" opacity=".35" transform="rotate(-12 190 233)"/>
+</svg>
+<div class="float f1"><span class="i"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l6 6M12 6l6 6-7 7-4 1 1-4zM4 20l4-4M9 11l4 4"/></svg></span><div><b>Vaccines on track</b>Records kept for you</div></div>
+<div class="float f2"><span class="i"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7z"/><path d="M7 7l7 7"/></svg></span><div><b>Medicine ready</b>Collect from our pharmacy</div></div>
+<div class="badge">Every<br>pet<br>welcome</div>
+</div>
+</div>
 
-        <h1>
-            Veterinary Hospital
-            Management System
-        </h1>
+<div class="ticker" aria-hidden="true"><div class="track"><span>Wellness check-ups</span><i>✦</i><span>Vaccinations</span><i>✦</i><span>In-house pharmacy</span><i>✦</i><span>Grooming</span><i>✦</i><span>Digital records</span><i>✦</i><span>Secure online payments</span><i>✦</i><span>Pet health QR</span><i>✦</i><span>Wellness check-ups</span><i>✦</i><span>Vaccinations</span><i>✦</i><span>In-house pharmacy</span><i>✦</i><span>Grooming</span><i>✦</i><span>Digital records</span><i>✦</i><span>Secure online payments</span><i>✦</i><span>Pet health QR</span><i>✦</i></div></div>
 
-        <p>
-            Smart • Secure • Compassionate Pet Care
-        </p>
+<section id="services" class="wrap">
+<div class="reveal"><span class="eyebrow">What we do</span><h2>Everything your best friend needs, under one roof.</h2><p class="sub">Thoughtful care for every stage of life, backed by a team that treats your pet like their own.</p></div>
+<div class="grid reveal"><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/></svg></span><h3>Wellness &amp; check-ups</h3><p>Routine exams and honest guidance from vets who take the time to know your pet.</p></article><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l6 6M12 6l6 6-7 7-4 1 1-4zM4 20l4-4M9 11l4 4"/></svg></span><h3>Vaccinations</h3><p>Keep every shot on schedule, with each record saved safely in your pet’s profile.</p></article><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7z"/><path d="M7 7l7 7"/></svg></span><h3>In-house pharmacy</h3><p>Prescriptions prepared at the hospital, so medicine is ready when you leave.</p></article><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.5 15.5M14.5 14.5L20 20M8.5 8.5L12 12"/></svg></span><h3>Grooming</h3><p>Bath, trim and tidy-up sessions that leave tails wagging and coats gleaming.</p></article><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></span><h3>Digital health records</h3><p>Visits, prescriptions and reports in one place, available whenever you need them.</p></article><article class="svc"><span class="svc-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><h3>Branches near you</h3><p>Care across our hospital branches, with your pet’s details at every one.</p></article></div>
+</section>
 
-        <a
-            class="btn"
-            href="/login.html"
-        >
-            PawsCare Open Hospital Portal
-        </a>
+<section id="how" class="wrap">
+<div class="reveal"><span class="eyebrow">Simple by design</span><h2>Three steps to a calmer vet visit.</h2><p class="sub">Less paperwork, shorter waits, more time for belly rubs.</p></div>
+<ol class="steps reveal"><li><span class="n">1</span><span class="step-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h3>Sign in to the portal</h3><p>Pet owners and hospital staff each get their own secure workspace.</p></li><li><span class="n">2</span><span class="step-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/></svg></span><h3>Book your vet visit</h3><p>Pick a veterinarian and a time that suits your family.</p></li><li><span class="n">3</span><span class="step-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2"/></svg></span><h3>Carry their health story</h3><p>Records, prescriptions and a scannable pet health report, always to hand.</p></li></ol>
+</section>
 
-    </div>
+<div class="wrap reveal"><div class="band">
+<div><h2>Your pet’s next visit starts here.</h2><p>Sign in to the patient portal to book an appointment, view records and manage payments.</p><div class="band-btns"><a class="btn" href="/login.html">Go to the portal →</a><a class="btn call-btn" href="tel:90099990999"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call 90099990999</a></div></div>
+<svg class="dog" viewBox="0 0 400 400" role="img" aria-label="A happy dog face"><g class="dog-collar"><path d="M104 296 Q200 352 296 296 L304 326 Q200 386 96 326Z" fill="#0b7a6e"/><circle cx="200" cy="362" r="19" fill="#ffd166" stroke="#e0a82e" stroke-width="3"/><path d="M200 369c-6-4-9-7-9-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-3 7-9 11z" fill="#0b7a6e"/></g>
+<g class="dog-ear dog-ear-l"><path d="M96 112C38 104 18 198 46 262c17 40 70 30 84-24 8-40 4-106-34-126z" fill="#a35d2c"/><path d="M92 140c-26 8-30 66-14 100 8 16 28 12 34-8" fill="#8a4a20" opacity=".55"/></g>
+<g class="dog-ear dog-ear-r"><path d="M304 112c58-8 78 86 50 150-17 40-70 30-84-24-8-40-4-106 34-126z" fill="#a35d2c"/><path d="M308 140c26 8 30 66 14 100-8 16-28 12-34-8" fill="#8a4a20" opacity=".55"/></g>
+<ellipse cx="200" cy="205" rx="122" ry="114" fill="#f2b863"/>
+<path d="M200 92c-24 26-30 70-16 112h32c14-42 8-86-16-112z" fill="#fff0d2"/>
+<ellipse cx="146" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(-18 146 160)"/><ellipse cx="254" cy="160" rx="16" ry="9" fill="#d8993f" transform="rotate(18 254 160)"/>
+<ellipse cx="200" cy="264" rx="72" ry="54" fill="#fff0d2"/>
+<circle cx="116" cy="238" r="15" fill="#ff8f80" opacity=".4"/><circle cx="284" cy="238" r="15" fill="#ff8f80" opacity=".4"/>
+<g class="dog-eyes"><circle cx="150" cy="192" r="17" fill="#2a1912"/><circle cx="250" cy="192" r="17" fill="#2a1912"/><circle cx="156" cy="185" r="6" fill="#fff"/><circle cx="256" cy="185" r="6" fill="#fff"/><circle cx="144" cy="199" r="2.6" fill="#fff" opacity=".8"/><circle cx="244" cy="199" r="2.6" fill="#fff" opacity=".8"/></g>
+<g class="dog-tongue"><path d="M182 294c0 40 10 46 18 46s18-6 18-46c-12 8-24 8-36 0z" fill="#ff7f8c"/><path d="M200 300v28" stroke="#e45f6e" stroke-width="3" stroke-linecap="round"/></g>
+<path d="M200 262v24M200 286c-6 16-26 20-40 6M200 286c6 16 26 20 40 6" stroke="#2a1912" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M174 238c0-12 12-20 26-20s26 8 26 20c0 14-14 26-26 26s-26-12-26-26z" fill="#2a1912"/><ellipse cx="190" cy="233" rx="9" ry="4.5" fill="#fff" opacity=".35" transform="rotate(-12 190 233)"/>
+</svg>
+</div></div>
+</main>
 
+<footer class="wrap"><span>© PawsCare Veterinary Hospital · Call us: <a href="tel:90099990999">90099990999</a></span><a href="/login.html">Hospital team sign in →</a></footer>
+<script>
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)});})();
+</script>
 </body>
-
 </html>

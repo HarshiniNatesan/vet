@@ -7,4 +7,5 @@ public interface PharmacyTransactionRepository extends JpaRepository<PharmacyTra
     List<PharmacyTransaction> findTop100ByOrderByDispensingDateDesc();
     long countByDispensingDateBetween(LocalDateTime start, LocalDateTime end);
     long countByDispensingDateGreaterThanEqual(LocalDateTime start);
+    List<PharmacyTransaction> findByPrescription(Prescription prescription);
 }

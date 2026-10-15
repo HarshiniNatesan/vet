@@ -31,6 +31,12 @@ public class User {
     @Column(name="created_at") private java.time.LocalDateTime createdAt;
     @Column(name="last_login") private java.time.LocalDateTime lastLogin;
 
+    @ManyToOne @JoinColumn(name="branch_id")
+    private Branch branch;
+
+    @Column(name="consultation_fee", precision=10, scale=2)
+    private java.math.BigDecimal consultationFee;
+
     public User() {}
 
     @PrePersist public void initialize(){ if(createdAt==null) createdAt=java.time.LocalDateTime.now(); if(active==null) active=true; }
@@ -58,6 +64,8 @@ public class User {
     public Boolean getActive(){return active;}
     public java.time.LocalDateTime getCreatedAt(){return createdAt;}
     public java.time.LocalDateTime getLastLogin(){return lastLogin;}
+    public Branch getBranch(){return branch;}
+    public java.math.BigDecimal getConsultationFee(){return consultationFee;}
 
     public void setId(Long id){this.id=id;}
     public void setUsername(String v){username=v;}
@@ -73,4 +81,6 @@ public class User {
     public void setActive(Boolean v){active=v;}
     public void setCreatedAt(java.time.LocalDateTime v){createdAt=v;}
     public void setLastLogin(java.time.LocalDateTime v){lastLogin=v;}
+    public void setBranch(Branch v){branch=v;}
+    public void setConsultationFee(java.math.BigDecimal v){consultationFee=v;}
 }
